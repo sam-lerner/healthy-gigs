@@ -14,45 +14,69 @@
     <title>Healthy Gigs</title>
 </head>
 
-<body>
-    <header>
-        <h1 class="brand-logo center">Healthy Gigs</h1>
-        <p class="center">Welcome to our site. Please enter in your search criteria below to find a gig near you!</p>
-        <nav>
-            <!-- Search options will go here. Need to have city name, start date, end date, dropdown for type of event and maximum number of results(?) -->
-            <form class="container">
-                <div class="row">
-                <input class="col s2" type="text" id="location-input" placeholder="Your city here" required>
-                    <label class="col s1">Start Date: </label>
-                    <input class="col s2" type="date" id="start-date">
-                    <label class="col s1">End Date: </label>
-                    <input class="col s2" type="date" id="end-date">
-                    <div class="input-field col s2">
-                        <select multiple>
-                            <option value="" disabled selected>Choose your event type</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
-                        </select>
-                        <!-- Button for search -->
-                        <button>Search</button>
-                    </div>
-                </div>
-                <!-- Button to clear results? -->
-            </form>
-        </nav>
+<body class="blue lighten-5 white-text">
+    <header class="nav-wrapper blue lighten-2">
+        <h1 class="center">Healthy Gigs</h1>
+        <br>
+        <div id="covid-info">
+            <!-- COVID Stats -->
+        </div>
+        <p class="right class" id="tag">Welcome to our site. Please enter in your search criteria below to find a gig
+            near you!</p>
     </header>
-    <!-- Overall container for the results. To the left will be a darker bar with recent searches. The Middle will have a window that displays the search results. Below the results field will be information about current COVID conditions in the area.  -->
     <main>
+        <div class="row">
+            <!-- Overall container for the results. To the left will be a darker bar with recent searches. The Middle will have a window that displays the search results. Below the results field will be information about current COVID conditions in the area.  -->
+            <div class="col s12 m4 l2 blue darken-4 z-depth-5" id="search-bar">
+                <!-- Darker left side panel -->
+                <h4 class="center">Search for your event!</h4>
+                <!-- Search options will go here. Need to have city name, start date, end date, dropdown for type of event and maximum number of results(?) -->
+                <div class="row input-field">
+                    <input id="location-input" type="text" class="validate">
+                    <label for="location-input">Choose your city</label>
+                </div>
+                <div class="row input-field">
+                    <input type="date" id="start-date">
+                    <label for="start-date">Start Date:</label>
+                </div>
+                <div class="row input-field">
+                    <input type="date" id="end-date">
+                    <label for="end-date">Start Date:</label>
+                </div>
 
+                <div class="input-field row">
+                    <select multiple>
+                        <option value="" disabled selected>Event Type</option>
+                        <option value="1" id="concerts">Concerts</option>
+                        <option value="2" id="sporting-events">Sporting Events</option>
+                        <option value="3" id="theater">Theater</option>
+                    </select>
+                </div>
+
+                <!-- Button for search -->
+                <button class="row" id="btn-search">Search</button>
+
+
+            </div>
+
+            <div class="col s12 m8 l10" id="results-area">
+                <!-- Larger panel  -->
+                <div id="search-results">
+                    <!-- Results populate here -->
+                </div>
+            </div>
+
+        </div>
     </main>
-    <footer class="page-footer">
+    <footer class="page-footer blue lighten-2 center">
         <h6>Stay safe and have fun!</h6>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./assets/javascript/sam-style-components.js"></script>
+    <script src="./assets/javascript/script.js"></script>
 </body>
 
 </html>
