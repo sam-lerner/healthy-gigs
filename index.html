@@ -17,13 +17,30 @@
 
 <body>
     <header>
-        <h1>Healthy Gigs</h1>
-        <p>Welcome to our site. Please enter in your search criteria below to find a gig near you!</p>
+        <h1 class="brand-logo center">Healthy Gigs</h1>
+        <p class="center">Welcome to our site. Please enter in your search criteria below to find a gig near you!</p>
         <nav>
             <!-- Search options will go here. Need to have city name, start date, end date, dropdown for type of event and maximum number of results(?) -->
-            <!-- Button for search -->
-            <button>Search</button>
-            <!-- Button to clear results? -->
+            <form class="container">
+                <div class="row">
+                <input class="col s2" type="text" id="location-input" placeholder="Your city here" required>
+                    <label class="col s1">Start Date: </label>
+                    <input class="col s2" type="date" id="start-date">
+                    <label class="col s1">End Date: </label>
+                    <input class="col s2" type="date" id="end-date">
+                    <div class="input-field col s2">
+                        <select multiple>
+                            <option value="" disabled selected>Choose your event type</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                        <!-- Button for search -->
+                        <button>Search</button>
+                    </div>
+                </div>
+                <!-- Button to clear results? -->
+            </form>
         </nav>
     </header>
     <!-- Overall container for the results. To the left will be a darker bar with recent searches. The Middle will have a window that displays the search results. Below the results field will be information about current COVID conditions in the area.  -->
@@ -42,7 +59,7 @@
         ></script>
 
     </main>
-    <footer>
+    <footer class="page-footer">
         <h6>Stay safe and have fun!</h6>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
