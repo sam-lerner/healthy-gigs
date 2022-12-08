@@ -1,7 +1,7 @@
 console.log("Begin");
 
-
-
+var searchFormEl = $('#search-form'); // Input Form
+var eventNameEl = $('#event-name'); // Event Name
 var locationEl = $('#location-input'); //City Name
 var startDateEl = $('#start-date'); // Start Date
 var endDateEl = $('#end-date'); // End Date
@@ -29,29 +29,52 @@ var eventUrl = 'https://api.seatgeek.com/2/events?client_id='+apiKeyEvent;
 console.log("Day: "+dayjs('2022-12-07T08:30:00'));
 
 // Event Handle: when click the search button
-function searchHandle(){
+function searchHandle(event){
+    
     console.log("function call");
-
     console.log("URL: "+ eventUrl);
 
+    event.preventDefault();
+
+    //  'https://api.seatgeek.com/2/events?venue.state=NY'
+
+    var eventName = eventNameEl.val().trim(); 
+    var zipcode = locationEl.val().trim() // search
     var startDate = startDateEl.val();  // Starting Date
     var endDate = endDateEl.val();  // Ending Date
 
-    // Set the time period by using gt, gte, lt, lte
-     //Ex: https://api.seatgeek.com/2/events?datetime_utc.gte=2012-04-01&datetime_utc.lte=2012-04-30
-    var apiUrl = eventUrl + '&datetime_utc.gte='+startDate+'&datetime_utc.lte='+endDate;
+    
+    var apiUrl = eventUrl;// + '&q='+eventName+'&postal_code='+zipcode;
+
+    if(eventName !== ''){
+        apiUrl += '&q='+eventName;
+    }
+
+    if(zipcode !== ''){
+        apiUrl += '&postal_code='+zipcode;
+    }
+
+    if(startDate !== ''){
+        console.log("Start Day: "+startDate);
+
+        apiUrl += '&datetime_utc.gte='+startDate;
+    }
+    
+    if(endDate !== ''){
+        apiUrl += '&datetime_utc.lte='+endDate;
+    }
+
+    // if(desc){
+    //     apiUrl += '&sort=datetime_utc.desc';
+    // }
 
     console.log("dateURL: "+ apiUrl);
 
-       // Sort the data datetime desc
-    var apiUrlDesc = apiUrl +'&sort=datetime_utc.desc';
-
-    console.log("Sorted URL: "+ apiUrlDesc);
 
     connectUrl(apiUrl); // sending API url
 }
 
-
+// Recevie apiUrl and call displayEvent();
 function connectUrl(url){
 
     fetch(url)
@@ -72,14 +95,34 @@ function connectUrl(url){
     })
     .catch(function (error) {
         console.log(error);
-        alert('Unable to get the data');
+        alert('Some problems happened!');
     });
 
 }
 
+
+function noData(){
+    searchResultEl.empty();
+    var noData = $('<p>').text("We're sorry!\nNo events matched your selection. \nTry broadening your selections");
+    searchResultEl.append(noData);
+}
+
+function errorMessage(){
+    searchResultEl.empty();
+
+}
+
+
+// display event list on the screen;
 function displayEvent(data){
 
-    var events = data.events;
+    searchResultEl.empty();
+    var events = data.events;   // 
+
+    if(events.length === 0){
+        noData();
+        console.log("No Data");
+    }
 
     for (let i = 0; i < events.length; i++) {
         var type = events[i].type;
@@ -90,7 +133,7 @@ function displayEvent(data){
         var date = events[i].datetime_utc;
         var dateLocal = events[i].datetime_local;
     
-        var venue = events[i].venue;
+        var venue = events[i].venue;    // venue
         var state = venue.state;
         var postalCode = venue.postal_code;
         var placeName = venue.name;
@@ -99,21 +142,15 @@ function displayEvent(data){
         var address = venue.address;
         var city = venue.city;
     
-        var performers = events[i].performers[0];
+        var performers = events[i].performers[0];   // performers
         var performerName = performers.name;
         var image = performers.image;
     
        
     
-        searchResultEl.append( $('<img>').attr('src',image));
-        
+        searchResultEl.append( $('<img>').attr('src',image));        
     }
-
-
 }
 
 
-
-
-
-searchBtn.on('click',searchHandle);
+searchFormEl.on('submit', searchHandle);
