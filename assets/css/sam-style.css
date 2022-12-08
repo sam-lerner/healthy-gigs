@@ -1,16 +1,9 @@
-header {
-    min-height: 25vh;
-    display: block;
 
-}
 
 body {
     margin: 0 10px;
 }
 
-#tag {
-    padding-right: 1vw;
-}
 #search-bar {
     padding-left: 1vw;
 }
