@@ -24,7 +24,7 @@ var eventUrl = 'https://api.seatgeek.com/2/events?client_id='+apiKeyEvent;
 
 // event.type: music_festival, concert, golf, family, theater, broadway_tickets_national, ncaa_basketball, ncaa_womens_basketball, wrestling, comedy, cirque_du_soleil, dance_performance_tour, minor_league_hockey, nhl......
 
-$event.type=music_festival+concert
+// $event.type=music_festival+concert
 
 console.log("Day: "+dayjs('2022-12-07T08:30:00'));
 
@@ -100,13 +100,14 @@ function connectUrl(url){
 
 }
 
-
+// If there is no result, show the message
 function noData(){
     searchResultEl.empty();
     var noData = $('<p>').text("We're sorry!\nNo events matched your selection. \nTry broadening your selections");
     searchResultEl.append(noData);
 }
 
+// Connection Error
 function errorMessage(){
     searchResultEl.empty();
 
@@ -154,7 +155,7 @@ function displayEvent(data){
         var eventTitle = $('<h4>').text(title);
         var eventDate = $('<p>').text(dayjs(date).format('MMM D, YYYY')+' / Place: '+placeName+' / '+address+', '+displayLocation);
         var eventPerfomer = $('<p>').text('Event Type: '+type+" / Performer: "+performerName);
-        var eventUrl = $('<p>').html($('<a href="'+url+'" target="_blank"> Link </a>'));
+        var eventUrl = $('<p>').html($('<a href="'+url+'" target="_blank"> SeatgeekLink </a>'));
        
         eventInformation.append(eventTitle, eventDate, eventPerfomer, eventUrl);
         eventDetails.append(eventImage, eventInformation);

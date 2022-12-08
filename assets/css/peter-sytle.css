@@ -1,9 +1,18 @@
-/* .event-details {
+.event-details {
     display: flex;
-    border: 1px solid;
+    border: 1px solid black;
+    margin: 20px;
 }
 
 .event-image {
+    flex: 1;
 
 
-} */
+}
+
+.event-information {
+    flex: 4;
+    padding: 10px;
+    color: black;
+
+}
