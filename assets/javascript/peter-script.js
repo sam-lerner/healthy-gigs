@@ -22,9 +22,9 @@ var eventUrl = 'https://api.seatgeek.com/2/events?client_id='+apiKeyEvent;
 // https://api.seatgeek.com/2/venues?client_id=OTQ2MzM3NXwxNjcwMzg3MzgzLjM4MjcwMDQ
 
 
-
 // event.type: music_festival, concert, golf, family, theater, broadway_tickets_national, ncaa_basketball, ncaa_womens_basketball, wrestling, comedy, cirque_du_soleil, dance_performance_tour, minor_league_hockey, nhl......
 
+$event.type=music_festival+concert
 
 console.log("Day: "+dayjs('2022-12-07T08:30:00'));
 
@@ -51,7 +51,7 @@ function searchHandle(event){
     }
 
     if(zipcode !== ''){
-        apiUrl += '&postal_code='+zipcode;
+        apiUrl += '&postal_code='+zipcode+'&range=30mi';
     }
 
     if(startDate !== ''){
@@ -141,14 +141,25 @@ function displayEvent(data){
         var lon = venue.location.lon;
         var address = venue.address;
         var city = venue.city;
+        var displayLocation = venue.display_location;
     
         var performers = events[i].performers[0];   // performers
         var performerName = performers.name;
         var image = performers.image;
     
+        var eventDetails = $('<div class="event-details">');
+        var eventImage = $('<div class="event-image">').html($('<img>').attr('src',image));
+
+        var eventInformation = $('<div class="event-information">');
+        var eventTitle = $('<h4>').text(title);
+        var eventDate = $('<p>').text(dayjs(date).format('MMM D, YYYY')+' / Place: '+placeName+' / '+address+', '+displayLocation);
+        var eventPerfomer = $('<p>').text('Event Type: '+type+" / Performer: "+performerName);
+        var eventUrl = $('<p>').html($('<a href="'+url+'" target="_blank"> Link </a>'));
        
-    
-        searchResultEl.append( $('<img>').attr('src',image));        
+        eventInformation.append(eventTitle, eventDate, eventPerfomer, eventUrl);
+        eventDetails.append(eventImage, eventInformation);
+
+        searchResultEl.append(eventDetails);        
     }
 }
 
