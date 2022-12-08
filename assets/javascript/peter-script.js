@@ -51,6 +51,30 @@ function searchHandle(){
 }
 
 
+function connectUrl(url){
+
+    fetch(url)
+    .then(function (response) {
+        if (response.ok) {
+            console.log("response: " + response);
+            return response.json();
+        } else {
+            alert('Error: ' + response.statusText);
+        }
+    })
+    .then(function (data) {
+        console.log("Data: " + data);
+        // console.log("apiUrl: " + apiUrl);
+
+        displayWeather(data);
+
+    })
+    .catch(function (error) {
+        console.log(error);
+        alert('Unable to get the data');
+    });
+
+}
 
 
 
