@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="assets/css/sam-style.css">
+    <link rel="stylesheet" href="./assets/css/peter-sytle.css">
     <title>Healthy Gigs</title>
 </head>
 
@@ -20,67 +21,96 @@
             <span class="nav-title">Healthy Gigs</span>
         </div>
         <div class="nav-wrapper">
-            <p id="tag" class="right" style="margin-right: 1vw;">Welcome to our site. Please enter in your search
+            <p id="tag" class="center">Welcome to our site. Please enter in your search
                 criteria to find a gig
                 near you!</p>
         </div>
     </nav>
-
-
-
     <main>
+        <ul id="slide-out" class="sidenav blue darken-3 z-depth-5">
+            <li>
+                <div class="user-view">
+                    <div id="search-bar">
+                        <h6 class="center">Search for your event!</h6>
+
+                        <form id="search-form">
+                            <div class="row input-field">
+                                <input id="event-name" type="text" class="validate">
+                                <label for="event-name">Event Name</label>
+                            </div>
+                            <div class="input-field row">
+                                <select multiple>
+                                    <option value="" disabled selected>Event Type</option>
+                                    <option value="1" id="concerts">Concerts</option>
+                                    <option value="2" id="sporting-events">Sporting Events</option>
+                                    <option value="3" id="theater">Theater</option>
+                                </select>
+                            </div>
+                            <div class="row input-field">
+                                <input id="location-input" type="text" class="validate">
+                                <label for="location-input">ZIP Code</label>
+                            </div>
+                            <div class="row input-field">
+                                <input type="date" id="start-date">
+                                <label for="start-date">Start Date:</label>
+                            </div>
+                            <div class="row input-field">
+                                <input type="date" id="end-date">
+                                <label for="end-date">Start Date:</label>
+                            </div>
+                            <!-- Button for search -->
+                            <button type='submit' class="row sidenav-close"id="btn-search">Search</button>
+                        </form>
+                    </div>
+            </li>
+        </ul>
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">Start your search!</i></a>
+        <div class="parallax-container">
+            <div class="parallax"><img src="./assets/images/top-image.jpeg"></div>
+        </div>
         <div class="row">
             <!-- Overall container for the results. To the left will be a darker bar with recent searches. The Middle will have a window that displays the search results. Below the results field will be information about current COVID conditions in the area.  -->
-            <div class="col s12 m4 l2 blue darken-4 z-depth-5" id="search-bar" style="padding: 0 1vw;">
-                <!-- Darker left side panel -->
-                <h5 class="center">Search for your event!</h5>
-                <!-- Search options will go here. Need to have city name, start date, end date, dropdown for type of event and maximum number of results(?) -->
-                <div class="row input-field">
-                    <input id="location-input" type="text" class="validate">
-                    <label for="location-input">Choose your city</label>
-                </div>
-                <div class="row input-field">
-                    <input type="date" id="start-date">
-                    <label for="start-date">Start Date:</label>
-                </div>
-                <div class="row input-field">
-                    <input type="date" id="end-date">
-                    <label for="end-date">Start Date:</label>
-                </div>
-
-                <div class="input-field row">
-                    <select multiple>
-                        <option value="" disabled selected>Event Type</option>
-                        <option value="1" id="concerts">Concerts</option>
-                        <option value="2" id="sporting-events">Sporting Events</option>
-                        <option value="3" id="theater">Theater</option>
-                    </select>
-                </div>
-
-                <!-- Button for search -->
-                <button class="row" id="btn-search">Search</button>
-
+            <div class="col s12 m3 l2">
 
             </div>
-
-            <div class="col s12 m8 l10" id="results-area">
+            <div class="col s8 m6 l8" id="results-area">
                 <!-- Larger panel  -->
                 <div id="search-results">
                     <!-- Results populate here -->
+                    <div>
+                        <div id="image">
+
+                        </div>
+                        <div id="details">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
+            <div class="col s4 m3 l2">
 
+            </div>
+        </div>
+        <div class="parallax-container">
+            <div class="parallax"><img src="./assets/images/concert-background.jpeg"></div>
         </div>
     </main>
     <footer class="page-footer blue lighten-2 center">
         <h6>Stay safe and have fun!</h6>
     </footer>
+    <!-- Dayjs  -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+        integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/javascript/sam-style-components.js"></script>
     <script src="./assets/javascript/script.js"></script>
+
+    <script src="./assets/javascript/peter-script.js"></script>
 </body>
 
 </html>
