@@ -147,12 +147,32 @@ function displayEvent(data){
         var performers = events[i].performers[0];   // performers
         var performerName = performers.name;
         var image = performers.image;
+
+        console.log("City: "+city);
     
         var eventDetails = $('<div class="event-details">');
-        var eventImage = $('<div class="event-image">').html($('<img>').attr('src',image));
+        // var eventImage = $('<div class="event-image">').html($('<a href="#" onclick="displayDetails("'+city+'")"><img src="'+image+'" alt="'+title+'"></a>'));
+        var eventImage = $('<div>');
+        var imgA = $('<a>');
+        imgA.attr("href", "#");
+        imgA.attr("onclick","displayDetails('"+events[i]+"')"); // sending events[i] to displayDetails
+        var img = $('<img>');
+        img.attr("src",image);
+        imgA.append(img);
+        eventImage.append(imgA);
+
+        
 
         var eventInformation = $('<div class="event-information">');
-        var eventTitle = $('<h4>').text(title);
+        var eventTitle = $('<h4>');
+        var titleA = $('<a>');
+        titleA.attr("href", "#");
+        titleA.attr("onclick","displayDetails('"+events[i]+"')"); // sending events[i] to displayDetails
+        titleA.text(title);
+        eventTitle.append(titleA);
+
+
+
         var eventDate = $('<p>').text(dayjs(date).format('MMM D, YYYY')+' / Place: '+placeName+' / '+address+', '+displayLocation);
         var eventPerfomer = $('<p>').text('Event Type: '+type+" / Performer: "+performerName);
         var eventUrl = $('<p>').html($('<a href="'+url+'" target="_blank"> SeatgeekLink </a>'));
@@ -164,5 +184,17 @@ function displayEvent(data){
     }
 }
 
+function displayDetails(event){
+    // alert("Call me");
+
+    searchResultEl.empty();
+
+    // var type = events.type;
+    console.log("Event: "+event);
+
+
+    searchResultEl.append($('<p> Hello </p>'));
+}
 
 searchFormEl.on('submit', searchHandle);
+connectUrl(eventUrl+"&geoip=true");
