@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <!-- Need a stylesheet that isn't bootstrap -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/peter-sytle.css">
+    <title>Healthy Gigs</title>
+</head>
+
+<body class="blue lighten-5 white-text">
+    <header class="nav-wrapper blue lighten-2">
+        <h1 class="center">Healthy Gigs</h1>
+        <br>
+        <div id="covid-info">
+            <!-- COVID Stats -->
+        </div>
+        <p class="right class" id="tag">Welcome to our site. Please enter in your search criteria below to find a gig
+            near you!</p>
+    </header>
+    <main>
+        <div class="row">
+            <!-- Overall container for the results. To the left will be a darker bar with recent searches. The Middle will have a window that displays the search results. Below the results field will be information about current COVID conditions in the area.  -->
+            <div class="col s12 m4 l2 blue darken-4 z-depth-5" id="search-bar">
+                <!-- Darker left side panel -->
+                <h4 class="center">Search for your event!</h4>
+                <!-- Search options will go here. Need to have city name, start date, end date, dropdown for type of event and maximum number of results(?) -->
+                <form id="search-form">
+                    <div class="row input-field">
+                        <input id="event-name" type="text" class="validate">
+                        <label for="event-name">Find event by name</label>
+                    </div>
+                    <div class="row input-field">
+                        <input id="location-input" type="text" class="validate">
+                        <label for="location-input">Zipcode</label>
+                    </div>
+                    <div class="row input-field">
+                        <input type="date" id="start-date">
+                        <label for="start-date">Start Date:</label>
+                    </div>
+                    <div class="row input-field">
+                        <input type="date" id="end-date">
+                        <label for="end-date">Start Date:</label>
+                    </div>
+
+
+                    <div class="input-field row">
+                        <select multiple>
+                            <option value="" disabled selected>Event Type</option>
+                            <option value="1" id="concerts">Concerts</option>
+                            <option value="2" id="sporting-events">Sporting Events</option>
+                            <option value="3" id="theater">Theater</option>
+                        </select>
+                    </div>
+
+                    <!-- Button for search -->
+                    <button type='submit' class="row" id="btn-search">Search</button>
+                </form>
+
+
+            </div>
+
+            <div class="col s12 m8 l10" id="results-area">
+                <!-- Larger panel  -->
+                <div id="search-results">
+                    <!-- Results populate here -->
+
+
+                    <div>
+                        <div id="image">
+
+                        </div>
+                        <div id="details">
+                            <h3></h3>
+                            <p></p>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <footer class="page-footer blue lighten-2 center">
+        <h6>Stay safe and have fun!</h6>
+    </footer>
+
+    <!-- Dayjs  -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+        integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./assets/javascript/sam-style-components.js"></script>
+    <!-- <script src="./assets/javascript/script.js"></script> -->
+    <script src="./assets/javascript/peter-script.js"></script>
+
+
+
+
+</body>
+
+</html>
