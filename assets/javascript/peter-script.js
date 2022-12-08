@@ -1,7 +1,7 @@
 console.log("Begin");
 
 
-var searchListEl = $('#search-bar');
+
 var locationEl = $('#location-input'); //City Name
 var startDateEl = $('#start-date'); // Start Date
 var endDateEl = $('#end-date'); // End Date
@@ -9,6 +9,7 @@ var concertEl = $('#concerts'); // Event type: concert
 var sportingEl = $('#sporting-events'); //Event type: sporting-event
 var theaterEl = $('#theater');   // Event type: theater
 var searchBtn = $('#btn-search');
+var searchResultEl = $('#search-results');
 
 
 // https://platform.seatgeek.com/  Event API document
@@ -66,7 +67,7 @@ function connectUrl(url){
         console.log("Data: " + data);
         // console.log("apiUrl: " + apiUrl);
 
-        displayWeather(data);
+        displayEvent(data);
 
     })
     .catch(function (error) {
@@ -75,6 +76,42 @@ function connectUrl(url){
     });
 
 }
+
+function displayEvent(data){
+
+    var events = data.events;
+
+    for (let i = 0; i < events.length; i++) {
+        var type = events[i].type;
+        console.log("Type: "+type);
+        var title = events[i].title;
+        var url = events[i].url;
+        var score = events[i].score;
+        var date = events[i].datetime_utc;
+        var dateLocal = events[i].datetime_local;
+    
+        var venue = events[i].venue;
+        var state = venue.state;
+        var postalCode = venue.postal_code;
+        var placeName = venue.name;
+        var lat = venue.location.lat;
+        var lon = venue.location.lon;
+        var address = venue.address;
+        var city = venue.city;
+    
+        var performers = events[i].performers[0];
+        var performerName = performers.name;
+        var image = performers.image;
+    
+       
+    
+        searchResultEl.append( $('<img>').attr('src',image));
+        
+    }
+
+
+}
+
 
 
 
