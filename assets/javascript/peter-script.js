@@ -1,6 +1,5 @@
 console.log("Begin");
 
-var modal = document.getElementById("myModal");
 var searchFormEl = $('#search-form'); // Input Form
 var eventNameEl = $('#event-name'); // Event Name
 var locationEl = $('#location-input'); //City Name
@@ -117,7 +116,7 @@ function errorMessage(){
 
 // display event list on the screen;
 function displayEvent(data){
-console.log(data);
+
     searchResultEl.empty();
     var events = data.events;   // 
 
@@ -128,8 +127,7 @@ console.log(data);
 
     for (let i = 0; i < events.length; i++) {
         var type = events[i].type;
-        // console.log("Event["+i+"] = " +events[i]);
-        // console.log("Type: "+type);
+        console.log("Type: "+type);
         var title = events[i].title;
         var url = events[i].url;
         var score = events[i].score;
@@ -150,31 +148,26 @@ console.log(data);
         var performerName = performers.name;
         var image = performers.image;
 
-        // console.log("City: "+city);
+        console.log("City: "+city);
     
         var eventDetails = $('<div class="event-details">');
+        // var eventImage = $('<div class="event-image">').html($('<a href="#" onclick="displayDetails("'+city+'")"><img src="'+image+'" alt="'+title+'"></a>'));
         var eventImage = $('<div>');
         var imgA = $('<a>');
         imgA.attr("href", "#");
-        imgA.click(function() {     // sending events[i] to displayDetails
-            displayDetails(events[i]);
-            modal.style.display = "block";
-        });
-        
-        var img = $('<img id='+i+'>');
-        img.attr("src",image);        
+        imgA.attr("onclick","displayDetails('"+events[i]+"')"); // sending events[i] to displayDetails
+        var img = $('<img>');
+        img.attr("src",image);
         imgA.append(img);
-        eventImage.append(imgA);               
+        eventImage.append(imgA);
+
+        
 
         var eventInformation = $('<div class="event-information">');
         var eventTitle = $('<h4>');
         var titleA = $('<a>');
         titleA.attr("href", "#");
-        titleA.click(function(){
-            displayDetails(events[i]);  // sending events[i] to displayDetails
-            modal.style.display = "block";
-        });
-                
+        titleA.attr("onclick","displayDetails('"+events[i]+"')"); // sending events[i] to displayDetails
         titleA.text(title);
         eventTitle.append(titleA);
 
@@ -191,66 +184,17 @@ console.log(data);
     }
 }
 
-function displayDetails(events){
-    $('.modal-content').empty();
+function displayDetails(event){
+    // alert("Call me");
 
-    var type = events.type;
-    console.log("Type: "+type);
-    var title = events.title;
-    var url = events.url;
-    var score = events.score;
-    var date = events.datetime_utc;
-    var dateLocal = events.datetime_local;
+    searchResultEl.empty();
 
-    var venue = events.venue;    // venue
-    var state = venue.state;
-    var postalCode = venue.postal_code;
-    var placeName = venue.name;
-    var lat = venue.location.lat;
-    var lon = venue.location.lon;
-    var address = venue.address;
-    var city = venue.city;
-    var displayLocation = venue.display_location;
+    // var type = events.type;
+    console.log("Event: "+event);
 
-    var performers = events.performers[0];   // performers
-    var performerName = performers.name;
-    var image = performers.image;
-    var ticket = performers.url;
-    var slug = performers.slug;
 
-    
-
-    var eventDetails = $('<div class="row detail-container">');
-    var imgContainer = $('<div class="image-container">');
-    var eventImg = $('<img height="400" width="400">');
-    eventImg.attr('src', image);
-    imgContainer.append(eventImg);
-
-    var eventInformation = $('<div class="detail-information">');
-    var eventTitle = $('<h3>').text(title);
-    var eventDate = $('<h5>').text(dayjs(date).format('MMM D, YYYY'));
-    var place = $('<h5>').text(placeName);
-    var address = $('<h5>').text(displayLocation);
-    var eventType = $('<p>').text('Event Type: '+type);
-    var nameOfPerformer = $('<p>').text('Performer: '+performerName);
-    var performerSlug = $('<p>').text('Slug: '+slug);
-    var eventScore = $('<p>').text("Score: "+score);
-    var ticket = $('<p>').html($('<a href="'+ticket+'" target="_blank"> Ticket </a>'));
-    var eventUrl = $('<p>').html($('<a href="'+url+'" target="_blank"> SeatgeekLink </a>'));
-    // var closeBtn = $('<button id="closeBtn">').text('Close');
-   
-    eventInformation.append(eventTitle, eventDate, place, address, eventType, nameOfPerformer, performerSlug, eventScore, ticket, eventUrl);
-    eventDetails.append(imgContainer, eventInformation);
-
-    // searchResultEl.append(eventDetails);    
-    $('.modal-content').append(eventDetails);
+    searchResultEl.append($('<p> Hello </p>'));
 }
 
 searchFormEl.on('submit', searchHandle);
 connectUrl(eventUrl+"&geoip=true");
-
-$('#closeBtn').on('click',function(){
-    modal.style.display = "none";
-    console.log("close");
-});
-

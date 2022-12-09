@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <!-- Need a stylesheet that isn't bootstrap -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/sam-style.css">
+    <link rel="stylesheet" href="assets/css/styleJackie.css">
+    <title>Healthy Gigs</title>
+</head>
+
+<body class="blue lighten-5 white-text">
+    <nav class="nav-extended green lighten-2">
+        <div class="nav-content center">
+            <span class="nav-title">Healthy Gigs</span>
+        </div>
+        <div class="nav-wrapper">
+            <p id="tag" class="right" style="margin-right: 1vw;">Welcome to our site. Please enter in your search
+                criteria to find a gig
+                near you!</p>
+        </div>
+    </nav>
+
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">Start Search</i></a>
+
+    <main>
+
+        <div class="parallax-container parallax-1">
+            <div class="parallax"><img src="images\Concert-hall-stock-photo.jpg"></div>
+        </div>
+        <div>
+            <div>
+
+                <div class="row">
+                    <!-- Overall container for the results. To the left will be a darker bar with recent searches. The Middle will have a window that displays the search results. Below the results field will be information about current COVID conditions in the area.  -->
+
+                    <nav> <!-- navbar content here  --> </nav>
+
+                    <ul id="slide-out" class="sidenav">
+                        <li>
+                            <div class="user-view">
+                                <div class="background">
+                                    <img src="images\Green-planner-photo.webp">
+                                </div>
+                                <a href="#user"><img class="circle" src="images\Health-logo-photo.jpg"></a>
+                                <p class="white-text-name">Healthy Gigs</p>
+                                
+                                <p class="white-text-email">Plan your event today!</p>
+
+                            </div>
+                        </li>
+                        <div class="col s12 m4 l2 z-depth-5" id="search-bar" style="padding: 0 1vw;">
+                            <!-- Darker left side panel -->
+                            <h5 class="center search-bar-title">Search for your event!</h5>
+                            <!-- Search options will go here. Need to have city name, start date, end date, dropdown for type of event and maximum number of results(?) -->
+                            <div class="row input-field">
+                                <input id="location-input" type="text" class="validate">
+                                <label for="location-input">Choose your city</label>
+                            </div>
+                            <div class="row input-field">
+                                <input type="date" id="start-date">
+                                <label for="start-date">Start Date:</label>
+                            </div>
+                            <div class="row input-field">
+                                <input type="date" id="end-date">
+                                <label for="end-date">End Date:</label>
+                            </div>
+
+                            <div class="input-field row">
+                                <select multiple>
+                                    <option value="" disabled selected>Event Type</option>
+                                    <option value="1" id="concerts">Concerts</option>
+                                    <option value="2" id="sporting-events">Sporting Events</option>
+                                    <option value="3" id="theater">Theater</option>
+                                </select>
+                            </div>
+
+                            <!-- Button for search -->
+                            <button class="row" id="btn-search">Search</button>
+
+                        </div>
+
+                    </ul>
+                    
+                </div>
+            </div>
+            <div class="parallax-container">
+                <div class="parallax"><img src="images\green-coronavirus.webp"></div>
+            </div>
+
+            <div class="col s12 m8 l10" id="results-area">
+                <!-- Larger panel  -->
+                <div id="search-results">
+                    <!-- Results populate here -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <footer class="page-footer green darken-2 center">
+        <h6 class="footer-text">Stay safe and have fun!</h6>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="assets/javascript/sam-style-components.js"></script>
+    <script src="assets/javascript/peter-script.js"></script>
+    <script src="assets/javascript/jake -apicall.js"></script>
+    <script src="assets/javascript/script.js"></script>
+    <script src="assets/javascript/scriptJackie.js"></script>
+</body>
+
+</html>
