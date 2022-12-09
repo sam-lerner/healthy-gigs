@@ -1,3 +1,6 @@
+var intials =['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
+var state = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virgina','Wisconsin','Wyoming']
+
 console.log("Begin");
 
 var searchFormEl = $('#search-form'); // Input Form
@@ -135,7 +138,7 @@ console.log(data);
         var dateLocal = events[i].datetime_local;
     
         var venue = events[i].venue;    // venue
-        var state = venue.state;
+        var state = intialConvert(venue.state);
         var postalCode = venue.postal_code;
         var placeName = venue.name;
         var lat = venue.location.lat;
@@ -148,31 +151,12 @@ console.log(data);
         var performerName = performers.name;
         var image = performers.image;
 
-        console.log("City: "+city);
     
         var eventDetails = $('<div class="event-details">');
-        // var eventImage = $('<div class="event-image">').html($('<a href="#" onclick="displayDetails("'+city+'")"><img src="'+image+'" alt="'+title+'"></a>'));
-        var eventImage = $('<div>');
-        var imgA = $('<a>');
-        imgA.attr("href", "#");
-        imgA.attr("onclick","displayDetails('"+events[i]+"')"); // sending events[i] to displayDetails
-        var img = $('<img>');
-        img.attr("src",image);
-        imgA.append(img);
-        eventImage.append(imgA);
-
-        
+        var eventImage = $('<div class="event-image">').html($('<img>').attr('src',image));
 
         var eventInformation = $('<div class="event-information">');
-        var eventTitle = $('<h4>');
-        var titleA = $('<a>');
-        titleA.attr("href", "#");
-        titleA.attr("onclick","displayDetails('"+events[i]+"')"); // sending events[i] to displayDetails
-        titleA.text(title);
-        eventTitle.append(titleA);
-
-
-
+        var eventTitle = $('<h4>').text(title);
         var eventDate = $('<p>').text(dayjs(date).format('MMM D, YYYY')+' / Place: '+placeName+' / '+address+', '+displayLocation);
         var eventPerfomer = $('<p>').text('Event Type: '+type+" / Performer: "+performerName);
         var eventUrl = $('<p>').html($('<a href="'+url+'" target="_blank"> SeatgeekLink </a>'));
@@ -180,21 +164,78 @@ console.log(data);
         eventInformation.append(eventTitle, eventDate, eventPerfomer, eventUrl);
         eventDetails.append(eventImage, eventInformation);
 
-        searchResultEl.append(eventDetails);        
+        searchResultEl.append(eventDetails);         
+        
+        geoPostCode(postalCode,state); // GeoPostCode nest --> cdcCovidData nest --> covidAppend
+       
     }
 }
 
-function displayDetails(event){
-    // alert("Call me");
-
-    searchResultEl.empty();
-
-    // var type = events.type;
-    console.log("Event: "+event);
 
 
-    searchResultEl.append($('<p> Hello </p>'));
+
+// insert in Display event func ; store as stateProper pass to cdcCovidData
+function intialConvert (venueLocale){
+    for (let i =0; i < intials.length; i++){
+        if (intials[i] == venueLocale){
+            return state[i];
+        }
+    }
+}
+
+
+// "https://cors-anywhere.herokuapp.com/
+
+// insert in Display event func ; store as county pass to cdcCovidData
+function geoPostCode(zip,state) {
+    $.ajax({
+      url: " https://service.zipapi.us/zipcode/county/"+ zip +"/?X-API-KEY=js-9bba29279d7363655cc244b9ad8465ee",
+      method: "GET",
+    }).then(function (response) {
+      console.log("Zip --> County Ajax Reponse \n-------------");
+      console.log(response);
+      var county = response.data.county;
+      cdcCovidData(state,county);
+
+    })
+  }
+
+// returns object of covid data; insert in deisply event func apend info to event card
+  function cdcCovidData(state, county) {
+    $.ajax({
+      url:"https://data.cdc.gov/resource/3nnm-4jni.json?$order=date_updated%20DESC&$limit=1&state="+ state +"&county="+ county +"%20County",
+      method: "GET",
+    }).then(function (response) {
+
+        console.log("Covid Data Ajax Reponse \n-------------");
+        console.log(response);
+        var covidData = {
+            level: response[0].covid_19_community_level,
+            covidCase: response[0].covid_cases_per_100k,
+            pop: response[0].county_population,
+            updateDay: response[0].date_updated}
+        covidAppend(covidData);
+        
+    });
+  }
+
+//   write code here to style/present covid data then append to existing events
+  function covidAppend (data){
+
+  }
+
+
+
+
+
+// check if intial and state match
+
+function log () {
+    console.log('Intials length: ',intials.length)
+    console.log('State length: ',state.length)
+    for(let i=0; (i < intials.length) && (i < state.length); i++){
+        console.log(state[i],intials[i]);
+    }
 }
 
 searchFormEl.on('submit', searchHandle);
-connectUrl(eventUrl+"&geoip=true");
