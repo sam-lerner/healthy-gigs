@@ -192,10 +192,6 @@ function displayDetails(event){
 
     searchResultEl.empty();
 
-<<<<<<< HEAD
-    // var type = events.type;
-    console.log("Event: "+event);
-=======
     var venue = events.venue;    // venue
     // var state = venue.state;
     var state = intialConvert(venue.state);
@@ -206,12 +202,8 @@ function displayDetails(event){
     var address = venue.address;
     var city = venue.city;
     var displayLocation = venue.display_location;
->>>>>>> 75c8311ddaf0b6a9a74f8fb294d42c121adf4438
 
 
-<<<<<<< HEAD
-    searchResultEl.append($('<p> Hello </p>'));
-=======
     
 
     var eventDetails = $('<div class="row detail-container">');
@@ -241,7 +233,6 @@ function displayDetails(event){
 
     // geoPostCode(postalCode,state);
     geoPostCode('08852','New Jersey');
->>>>>>> 75c8311ddaf0b6a9a74f8fb294d42c121adf4438
 }
 
 

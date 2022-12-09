@@ -88,3 +88,42 @@
     cursor: pointer;
   }
 
+  body {
+    margin: 0 10px;
+}
+#search-bar {
+    padding-left: 1vw;
+}
+.parallax-1 {
+    width: 100%;
+}
+#search-bar {
+    width: 100%;
+}
+.nav-title {
+    font-family: Luminari, fantasy;
+    font-size: larger;
+}
+#tag {
+    font-weight: bolder;
+}
+.white-text-name {
+font-size: 30px;
+
+}
+.white-text-subname {
+font-size: 20px;
+padding-bottom: 30px;
+}
+.search-bar-title {
+    color: black;
+}
+nav {
+    background-color:#44cf77;
+}
+.nav-content-center {
+    background-color: #03fc5e;
+}
+.footer-text {
+    padding-bottom: 30px;
+}
