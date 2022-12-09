@@ -8,25 +8,41 @@
     <meta name="Description" content="Enter your description here" />
     <!-- Need a stylesheet that isn't bootstrap -->
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/materialize.css">
     <link rel="stylesheet" href="assets/css/sam-style.css">
-    <link rel="stylesheet" href="./assets/css/peter-sytle.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- <link rel="stylesheet" href="./assets/css/peter-sytle.css"> -->
     <title>Healthy Gigs</title>
 </head>
 
 <body class="blue lighten-5 white-text">
     <nav class="nav-extended blue lighten-2">
         <div class="nav-content center">
-            <span class="nav-title">Healthy Gigs</span>
+            <a class="nav-title">Healthy Gigs</a>
         </div>
         <div class="nav-wrapper">
             <p id="tag" class="center">Welcome to our site. Please enter in your search
                 criteria to find a gig
                 near you!</p>
         </div>
+
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <div class="btn-content">
+                <button id="closeBtn">Close</button>
+            </div>
+            <!-- Modal content -->
+            <div class="modal-content">
+
+            </div>
+        </div>
+        <!-- The Modal End-->
     </nav>
     <main>
+        
         <ul id="slide-out" class="sidenav blue darken-3 z-depth-5">
             <li>
                 <div class="user-view">
@@ -59,7 +75,7 @@
                                 <label for="end-date">Start Date:</label>
                             </div>
                             <!-- Button for search -->
-                            <button type='submit' class="row sidenav-close"id="btn-search">Search</button>
+                            <button type='submit' class="row sidenav-close" id="btn-search">Search</button>
                         </form>
                     </div>
             </li>
@@ -106,9 +122,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <!-- Compiled and minified JavaScript -->
+<<<<<<< HEAD
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/javascript/sam-style-components.js"></script>
     <script src="./assets/javascript/script.js"></script>
+=======
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+    <script src="./assets/javascript/materialize.js"></script>
+    <script src="./assets/javascript/sam-style-components.js"></script>
+    <script src="./assets/javascript/script.js"></script>
+    <script src="./assets/javascript/peter-script.js"></script>    
+>>>>>>> 75c8311ddaf0b6a9a74f8fb294d42c121adf4438
 </body>
 
 </html>
