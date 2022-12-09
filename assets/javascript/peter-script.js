@@ -35,22 +35,22 @@ console.log("Day: "+dayjs('2022-12-07T08:30:00'));
 // Event Handle: when click the search button
 function searchHandle(event){
     
-    console.log("function call");
-    console.log("URL: "+ eventUrl);
+    // console.log("function call");
+    // console.log("URL: "+ eventUrl);
 
     event.preventDefault();
 
     //  'https://api.seatgeek.com/2/events?venue.state=NY'
 
-    var eventName = eventNameEl.val().trim(); 
-    var zipcode = locationEl.val().trim() // search
+    var eventName = eventNameEl.val().trim(); // search by any name match
+    var zipcode = locationEl.val().trim() // search zipcode
     var startDate = startDateEl.val();  // Starting Date
     var endDate = endDateEl.val();  // Ending Date
 
     
     var apiUrl = eventUrl;// + '&q='+eventName+'&postal_code='+zipcode;
 
-    if(eventName !== ''){
+    if(eventName !== ''){   //
         apiUrl += '&q='+eventName;
     }
 
@@ -288,18 +288,25 @@ function geoPostCode(zip,state) {
 
 // returns object of covid data; insert in deisply event func apend info to event card
   function cdcCovidData(state, county) {
+
+    var apiUrl = "https://data.cdc.gov/resource/3nnm-4jni.json?$order=date_updated%20DESC&$limit=1&state="+ state +"&county="+ county +"%20County";
+
     $.ajax({
-      url:"https://data.cdc.gov/resource/3nnm-4jni.json?$order=date_updated%20DESC&$limit=1&state="+ state +"&county="+ county +"%20County",
+      url: apiUrl,
       method: "GET",
     }).then(function (response) {
 
         console.log("Covid Data Ajax Reponse \n-------------");
         console.log(response);
         var covidData = {
+            county: response[0].county, 
             level: response[0].covid_19_community_level,
             covidCase: response[0].covid_cases_per_100k,
             pop: response[0].county_population,
-            updateDay: response[0].date_updated}
+            updateDay: response[0].date_updated
+        }
+         console.log("CDC API URL: "+apiUrl);
+        
         covidAppend(covidData);
         
     });
@@ -307,21 +314,23 @@ function geoPostCode(zip,state) {
 
 //   write code here to style/present covid data then append to existing events
   function covidAppend (data){
+    var county = data.county;
     var level = data.level;
     var covidCase = data.covidCase;
     var pop = data.pop;
     var updateDay = data.updateDay;
 
-    console.log("level: "+level);
+    // console.log("level: "+level);
 
     var covidDisplay = $('<div>');
+    var countyEl = $('<h5>').text(county);
     var levelEl = $('<p>').text("Covid Level: "+level);
     var covidCaseEl = $('<p>').text("Cases Per 100K: "+covidCase);
     var popEl = $('<p>').text("County Populataion: "+pop);
     var updateDayEl = $('<p>').text("Last Updated: "+updateDay);
 
 
-    covidDisplay.append(levelEl, covidCaseEl, popEl, updateDayEl);
+    covidDisplay.append(countyEl, levelEl, covidCaseEl, popEl, updateDayEl);
     $('.detail-container').append(covidDisplay);
   }
 
