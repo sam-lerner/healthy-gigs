@@ -10,10 +10,11 @@ var locationEl = $('#location-input'); //City Name
 var startDateEl = $('#start-date'); // Start Date
 var endDateEl = $('#end-date'); // End Date
 var concertEl = $('#concerts'); // Event type: concert
-var sportingEl = $('#sporting-events'); //Event type: sporting-event
+var familyEl = $('#familys'); //Event type: family-event
 var theaterEl = $('#theater');   // Event type: theater
 var searchBtn = $('#btn-search');
 var searchResultEl = $('#search-results');
+var rengeEl;
 
 
 // https://platform.seatgeek.com/  Event API document
@@ -48,29 +49,57 @@ function searchHandle(event){
     var endDate = endDateEl.val();  // Ending Date
 
     
-    var apiUrl = eventUrl;// + '&q='+eventName+'&postal_code='+zipcode;
+    var apiUrl = eventUrl;
 
-    if(eventName !== ''){   //
+    if(eventName !== ''){   // search by event name
         apiUrl += '&q='+eventName;
     }
 
-    if(zipcode !== ''){
-        apiUrl += '&postal_code='+zipcode+'&range=30mi';
+        
+    if(zipcode !== ''){ // search by zipcode
+        apiUrl += '&postal_code='+zipcode;
     }
+    
+    var range = 30;
+    
+    if(rengeEl){    // search by range, default is 30mi
+        range = rengeEl;
+    }
+    
+    apiUrl += '&range='+range+'mi';
+    
 
-    if(startDate !== ''){
-        console.log("Start Day: "+startDate);
+    if(startDate !== ''){   // search by start date
+        console.log("Start Day: "+startDate);   
 
         apiUrl += '&datetime_utc.gte='+startDate;
     }
     
-    if(endDate !== ''){
+    if(endDate !== ''){     // search by end date
         apiUrl += '&datetime_utc.lte='+endDate;
     }
+
+    
+    // search by type
+    if(concertEl){
+        apiUrl += '&type='+concertEl.val();      // concert
+    }
+
+    if(familyEl){
+        apiUrl += '&type='+familyEl.val();       // family
+    }
+
+    if(theaterEl){
+        apiUrl += '&type='+theaterEl.val();       // theater
+    }
+
 
     // if(desc){
     //     apiUrl += '&sort=datetime_utc.desc';
     // }
+
+
+
 
     console.log("dateURL: "+ apiUrl);
 
