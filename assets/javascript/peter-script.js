@@ -262,7 +262,7 @@ function displayDetails(events) {
     var eventTitle = $('<h3>').text(title);
 
     var eventDetailBox = $('<div class="detail-box">');
-    var eventDate = $('<h5>').text(dayjs(date).format('MMM D, YYYY'));
+    var eventDate = $('<h5>').text(dayjs(dateLocal).format('MMM D, YYYY [-] hh:mm a'));
     var place = $('<h5>').text(placeName);
     var address = $('<h5>').text(displayLocation);
     var eventType = $('<p>').text('Event Type: ' + type);
