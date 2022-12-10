@@ -127,3 +127,11 @@ nav {
 .footer-text {
     padding-bottom: 30px;
 }
+.parallax-container {
+    height: 20vh;
+  }
+  .material-icons {
+    color: black;
+    max-width: max-content;
+  }
+
