@@ -1,5 +1,5 @@
-var intials =['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
-var state = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virgina','Wisconsin','Wyoming']
+var intials = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
+var state = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virgina', 'Wisconsin', 'Wyoming']
 
 console.log("Begin");
 
@@ -9,6 +9,9 @@ var eventNameEl = $('#event-name'); // Event Name
 var locationEl = $('#location-input'); //City Name
 var startDateEl = $('#start-date'); // Start Date
 var endDateEl = $('#end-date'); // End Date
+// var eventTypeEl = $('#event-type');
+var eventTypeEl = document.getElementById('event-type');
+
 var concertEl = $('#concerts'); // Event type: concert
 var familyEl = $('#familys'); //Event type: family-event
 var theaterEl = $('#theater');   // Event type: theater
@@ -22,7 +25,7 @@ var rengeEl;
 // Our Example: https://api.seatgeek.com/2/events?client_id=OTQ2MzM3NXwxNjcwMzg3MzgzLjM4MjcwMDQ
 
 var apiKeyEvent = 'OTQ2MzM3NXwxNjcwMzg3MzgzLjM4MjcwMDQ';
-var eventUrl = 'https://api.seatgeek.com/2/events?client_id='+apiKeyEvent;
+var eventUrl = 'https://api.seatgeek.com/2/events?client_id=' + apiKeyEvent;
 
 // https://api.seatgeek.com/2/venues?client_id=OTQ2MzM3NXwxNjcwMzg3MzgzLjM4MjcwMDQ
 
@@ -31,11 +34,11 @@ var eventUrl = 'https://api.seatgeek.com/2/events?client_id='+apiKeyEvent;
 
 // $event.type=music_festival+concert
 
-console.log("Day: "+dayjs('2022-12-07T08:30:00'));
+console.log("Day: " + dayjs('2022-12-07T08:30:00'));
 
 // Event Handle: when click the search button
-function searchHandle(event){
-    
+function searchHandle(event) {
+
     // console.log("function call");
     // console.log("URL: "+ eventUrl);
 
@@ -47,113 +50,107 @@ function searchHandle(event){
     var zipcode = locationEl.val().trim() // search zipcode
     var startDate = startDateEl.val();  // Starting Date
     var endDate = endDateEl.val();  // Ending Date
+    var concert = concertEl.val();
+    var family = familyEl.val();
+    var theater = theaterEl.val();
 
-    
+
     var apiUrl = eventUrl;
 
-    if(eventName !== ''){   // search by event name
-        apiUrl += '&q='+eventName;
+    if (eventName !== '') {   // search by event name
+        apiUrl += '&q=' + eventName;
     }
 
-        
-    if(zipcode !== ''){ // search by zipcode
-        apiUrl += '&postal_code='+zipcode;
+
+    if (zipcode !== '') { // search by zipcode
+        apiUrl += '&postal_code=' + zipcode;
     }
-    
+
     var range = 30;
-    
-    if(rengeEl){    // search by range, default is 30mi
+
+    if (rengeEl) {    // search by range, default is 30mi
         range = rengeEl;
     }
+
+    apiUrl += '&range=' + range + 'mi';
+
+
+    if (startDate !== '') {   // search by start date
+
+        apiUrl += '&datetime_utc.gte=' + startDate;
+    }
+
+    if (endDate !== '') {     // search by end date
+        apiUrl += '&datetime_utc.lte=' + endDate;
+    }
+
+    var types = '';
     
-    apiUrl += '&range='+range+'mi';
-    
 
-    if(startDate !== ''){   // search by start date
-        console.log("Start Day: "+startDate);   
-
-        apiUrl += '&datetime_utc.gte='+startDate;
-    }
-    
-    if(endDate !== ''){     // search by end date
-        apiUrl += '&datetime_utc.lte='+endDate;
-    }
-
-    
-    // search by type
-    if(concertEl){
-        apiUrl += '&type='+concertEl.val();      // concert
-    }
-
-    if(familyEl){
-        apiUrl += '&type='+familyEl.val();       // family
-    }
-
-    if(theaterEl){
-        apiUrl += '&type='+theaterEl.val();       // theater
-    }
+    $('select option:selected').each(function (i, selectedElement) {
+        types += '&type='+$(selectedElement).val();                
+    });
 
 
+    apiUrl += types;    // search by type
+
+   
     // if(desc){
-    //     apiUrl += '&sort=datetime_utc.desc';
+    //     apiUrl += '&sort=datetime_utc.desc';     // Sorting to Desc
     // }
 
-
-
-
-    console.log("dateURL: "+ apiUrl);
-
+    console.log("dateURL: " + apiUrl);
 
     connectUrl(apiUrl); // sending API url
 }
 
 // Recevie apiUrl and call displayEvent();
-function connectUrl(url){
+function connectUrl(url) {
 
     fetch(url)
-    .then(function (response) {
-        if (response.ok) {
-            console.log("response: " + response);
-            return response.json();
-        } else {
-            alert('Error: ' + response.statusText);
-        }
-    })
-    .then(function (data) {
-        console.log("Data: " + data);
-        // console.log("apiUrl: " + apiUrl);
+        .then(function (response) {
+            if (response.ok) {
+                console.log("response: " + response);
+                return response.json();
+            } else {
+                alert('Error: ' + response.statusText);
+            }
+        })
+        .then(function (data) {
+            console.log("Data: " + data);
+            // console.log("apiUrl: " + apiUrl);
 
-        displayEvent(data);
+            displayEvent(data);
 
-    })
-    .catch(function (error) {
-        console.log(error);
-        alert('Some problems happened!');
-    });
+        })
+        .catch(function (error) {
+            console.log(error);
+            alert('Some problems happened!');
+        });
 
 }
 
 // If there is no result, show the message
-function noData(){
+function noData() {
     searchResultEl.empty();
     var noData = $('<p>').text("We're sorry!\nNo events matched your selection. \nTry broadening your selections");
     searchResultEl.append(noData);
 }
 
 // Connection Error
-function errorMessage(){
+function errorMessage() {
     searchResultEl.empty();
 
 }
 
 
 // display event list on the screen;
-function displayEvent(data){
-console.log(data);
+function displayEvent(data) {
+    console.log(data);
     searchResultEl.empty();
     var events = data.events;   // 
 
-    if(events.length === 0){
+    if (events.length === 0) {
         noData();
         console.log("No Data");
     }
@@ -167,7 +164,7 @@ console.log(data);
         var score = events[i].score;
         var date = events[i].datetime_utc;
         var dateLocal = events[i].datetime_local;
-    
+
         var venue = events[i].venue;    // venue
         var state = venue.state;
         var postalCode = venue.postal_code;
@@ -177,57 +174,57 @@ console.log(data);
         var address = venue.address;
         var city = venue.city;
         var displayLocation = venue.display_location;
-    
+
         var performers = events[i].performers[0];   // performers
         var performerName = performers.name;
         var image = performers.image;
 
         // console.log("City: "+city);
-    
+
         var eventDetails = $('<div class="event-details">');
         var eventImage = $('<div>');
         var imgA = $('<a>');
         imgA.attr("href", "#");
-        imgA.click(function() {     // sending events[i] to displayDetails
+        imgA.click(function () {     // sending events[i] to displayDetails
             displayDetails(events[i]);
             modal.style.display = "block";
         });
-        
-        var img = $('<img id='+i+'>');
-        img.attr("src",image);        
+
+        var img = $('<img id=' + i + '>');
+        img.attr("src", image);
         imgA.append(img);
-        eventImage.append(imgA);               
+        eventImage.append(imgA);
 
         var eventInformation = $('<div class="event-information">');
         var eventTitle = $('<h4>');
         var titleA = $('<a>');
         titleA.attr("href", "#");
-        titleA.click(function(){
+        titleA.click(function () {
             displayDetails(events[i]);  // sending events[i] to displayDetails
             modal.style.display = "block";
         });
-                
+
         titleA.text(title);
         eventTitle.append(titleA);
 
 
 
-        var eventDate = $('<p>').text(dayjs(date).format('MMM D, YYYY')+' / Place: '+placeName+' / '+address+', '+displayLocation);
-        var eventPerfomer = $('<p>').text('Event Type: '+type+" / Performer: "+performerName);
-        var eventUrl = $('<p>').html($('<a href="'+url+'" target="_blank"> SeatgeekLink </a>'));
-       
+        var eventDate = $('<p>').text(dayjs(date).format('MMM D, YYYY') + ' / Place: ' + placeName + ' / ' + address + ', ' + displayLocation);
+        var eventPerfomer = $('<p>').text('Event Type: ' + type + " / Performer: " + performerName);
+        var eventUrl = $('<p>').html($('<a href="' + url + '" target="_blank"> SeatgeekLink </a>'));
+
         eventInformation.append(eventTitle, eventDate, eventPerfomer, eventUrl);
         eventDetails.append(eventImage, eventInformation);
 
-        searchResultEl.append(eventDetails);        
+        searchResultEl.append(eventDetails);
     }
 }
 
-function displayDetails(events){
+function displayDetails(events) {
     $('.modal-content').empty();
 
     var type = events.type;
-    console.log("Type: "+type);
+    console.log("Type: " + type);
     var title = events.title;
     var url = events.url;
     var score = events.score;
@@ -251,7 +248,7 @@ function displayDetails(events){
     var ticket = performers.url;
     var slug = performers.slug;
 
-    
+
 
     var eventDetails = $('<div class="row detail-container">');
     var imgContainer = $('<div class="image-container">');
@@ -264,14 +261,14 @@ function displayDetails(events){
     var eventDate = $('<h5>').text(dayjs(date).format('MMM D, YYYY'));
     var place = $('<h5>').text(placeName);
     var address = $('<h5>').text(displayLocation);
-    var eventType = $('<p>').text('Event Type: '+type);
-    var nameOfPerformer = $('<p>').text('Performer: '+performerName);
-    var performerSlug = $('<p>').text('Slug: '+slug);
-    var eventScore = $('<p>').text("Score: "+score);
-    var ticket = $('<p>').html($('<a href="'+ticket+'" target="_blank"> Ticket </a>'));
-    var eventUrl = $('<p>').html($('<a href="'+url+'" target="_blank"> SeatgeekLink </a>'));
+    var eventType = $('<p>').text('Event Type: ' + type);
+    var nameOfPerformer = $('<p>').text('Performer: ' + performerName);
+    var performerSlug = $('<p>').text('Slug: ' + slug);
+    var eventScore = $('<p>').text("Score: " + score);
+    var ticket = $('<p>').html($('<a href="' + ticket + '" target="_blank"> Ticket </a>'));
+    var eventUrl = $('<p>').html($('<a href="' + url + '" target="_blank"> SeatgeekLink </a>'));
     // var closeBtn = $('<button id="closeBtn">').text('Close');
-   
+
     eventInformation.append(eventTitle, eventDate, place, address, eventType, nameOfPerformer, performerSlug, eventScore, ticket, eventUrl);
     eventDetails.append(imgContainer, eventInformation);
 
@@ -279,14 +276,14 @@ function displayDetails(events){
     $('.modal-content').append(eventDetails);
 
     // geoPostCode(postalCode,state);
-    geoPostCode('08852','New Jersey');
+    geoPostCode('08852', 'New Jersey');
 }
 
 
 // insert in Display event func ; store as stateProper pass to cdcCovidData
-function intialConvert (venueLocale){
-    for (let i =0; i < intials.length; i++){
-        if (intials[i] == venueLocale){
+function intialConvert(venueLocale) {
+    for (let i = 0; i < intials.length; i++) {
+        if (intials[i] == venueLocale) {
             return state[i];
         }
     }
@@ -296,12 +293,12 @@ function intialConvert (venueLocale){
 // "https://cors-anywhere.herokuapp.com/
 
 // insert in Display event func ; store as county pass to cdcCovidData
-function geoPostCode(zip,state) {
+function geoPostCode(zip, state) {
 
     console.log("function geoPostCode");
-    console.log("zip:" +zip);
-    console.log("state:" +state);
-    cdcCovidData(state,"Middlesex");
+    console.log("zip:" + zip);
+    console.log("state:" + state);
+    cdcCovidData(state, "Middlesex");
 
     // $.ajax({
     //   url: " https://service.zipapi.us/zipcode/county/"+ zip +"/?X-API-KEY=js-9bba29279d7363655cc244b9ad8465ee",
@@ -313,36 +310,36 @@ function geoPostCode(zip,state) {
     //   cdcCovidData(state,county);
 
     // })
-  }
+}
 
 // returns object of covid data; insert in deisply event func apend info to event card
-  function cdcCovidData(state, county) {
+function cdcCovidData(state, county) {
 
-    var apiUrl = "https://data.cdc.gov/resource/3nnm-4jni.json?$order=date_updated%20DESC&$limit=1&state="+ state +"&county="+ county +"%20County";
+    var apiUrl = "https://data.cdc.gov/resource/3nnm-4jni.json?$order=date_updated%20DESC&$limit=1&state=" + state + "&county=" + county + "%20County";
 
     $.ajax({
-      url: apiUrl,
-      method: "GET",
+        url: apiUrl,
+        method: "GET",
     }).then(function (response) {
 
         console.log("Covid Data Ajax Reponse \n-------------");
         console.log(response);
         var covidData = {
-            county: response[0].county, 
+            county: response[0].county,
             level: response[0].covid_19_community_level,
             covidCase: response[0].covid_cases_per_100k,
             pop: response[0].county_population,
             updateDay: response[0].date_updated
         }
-         console.log("CDC API URL: "+apiUrl);
-        
+        console.log("CDC API URL: " + apiUrl);
+
         covidAppend(covidData);
-        
+
     });
-  }
+}
 
 //   write code here to style/present covid data then append to existing events
-  function covidAppend (data){
+function covidAppend(data) {
     var county = data.county;
     var level = data.level;
     var covidCase = data.covidCase;
@@ -353,22 +350,22 @@ function geoPostCode(zip,state) {
 
     var covidDisplay = $('<div>');
     var countyEl = $('<h5>').text(county);
-    var levelEl = $('<p>').text("Covid Level: "+level);
-    var covidCaseEl = $('<p>').text("Cases Per 100K: "+covidCase);
-    var popEl = $('<p>').text("County Populataion: "+pop);
-    var updateDayEl = $('<p>').text("Last Updated: "+updateDay);
+    var levelEl = $('<p>').text("Covid Level: " + level);
+    var covidCaseEl = $('<p>').text("Cases Per 100K: " + covidCase);
+    var popEl = $('<p>').text("County Populataion: " + pop);
+    var updateDayEl = $('<p>').text("Last Updated: " + updateDay);
 
 
     covidDisplay.append(countyEl, levelEl, covidCaseEl, popEl, updateDayEl);
     $('.detail-container').append(covidDisplay);
-  }
+}
 
 
 
 searchFormEl.on('submit', searchHandle);
-connectUrl(eventUrl+"&geoip=true");
+connectUrl(eventUrl + "&geoip=true");
 
-$('#closeBtn').on('click',function(){
+$('#closeBtn').on('click', function () {
     modal.style.display = "none";
     console.log("close");
 });
