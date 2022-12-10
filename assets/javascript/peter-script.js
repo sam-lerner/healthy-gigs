@@ -133,8 +133,10 @@ function connectUrl(url) {
 // If there is no result, show the message
 function noData() {
     searchResultEl.empty();
-    var noData = $('<p>').text("We're sorry!\nNo events matched your selection. \nTry broadening your selections");
-    searchResultEl.append(noData);
+    var noDataContainer = $('<div class="no-data">');
+    var noData = $('<h4>').html("We're sorry! <br />No events matched your selection. <br />Try broadening your selections");
+    noDataContainer.append(noData);
+    searchResultEl.append(noDataContainer);
 }
 
 // Connection Error

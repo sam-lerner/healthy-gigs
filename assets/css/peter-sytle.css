@@ -53,6 +53,12 @@
   flex: 0 0 50%;
 }
 
+.no-data{
+  text-align: center;
+  color:rgb(165, 40, 40);
+  line-height: 2;
+}
+
 
 
 /* The Modal (background) */
