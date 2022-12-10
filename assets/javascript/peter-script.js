@@ -258,6 +258,8 @@ function displayDetails(events) {
 
     var eventInformation = $('<div class="detail-information">');
     var eventTitle = $('<h3>').text(title);
+
+    var eventDetailBox = $('<div class="detail-box">');
     var eventDate = $('<h5>').text(dayjs(date).format('MMM D, YYYY'));
     var place = $('<h5>').text(placeName);
     var address = $('<h5>').text(displayLocation);
@@ -269,7 +271,9 @@ function displayDetails(events) {
     var eventUrl = $('<p>').html($('<a href="' + url + '" target="_blank"> SeatgeekLink </a>'));
     // var closeBtn = $('<button id="closeBtn">').text('Close');
 
-    eventInformation.append(eventTitle, eventDate, place, address, eventType, nameOfPerformer, performerSlug, eventScore, ticket, eventUrl);
+    eventDetailBox.append(eventDate, place, address, eventType, nameOfPerformer, performerSlug, eventScore, ticket, eventUrl);
+    eventInformation.append(eventTitle, eventDetailBox);   
+        
     eventDetails.append(imgContainer, eventInformation);
 
     // searchResultEl.append(eventDetails);    
@@ -348,7 +352,7 @@ function covidAppend(data) {
 
     // console.log("level: "+level);
 
-    var covidDisplay = $('<div>');
+    var covidDisplay = $('<div class="covid-detail">');
     var countyEl = $('<h5>').text(county);
     var levelEl = $('<p>').text("Covid Level: " + level);
     var covidCaseEl = $('<p>').text("Cases Per 100K: " + covidCase);
@@ -357,7 +361,7 @@ function covidAppend(data) {
 
 
     covidDisplay.append(countyEl, levelEl, covidCaseEl, popEl, updateDayEl);
-    $('.detail-container').append(covidDisplay);
+    $('.detail-information').append(covidDisplay);
 }
 
 
