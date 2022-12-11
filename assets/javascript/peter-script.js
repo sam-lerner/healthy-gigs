@@ -154,7 +154,7 @@ function errorMessage() {
 function pagination(page, per_page, total) {
 
     var totalPagination = parseInt(total / per_page) + 1;
-    var numberOfPagination = 10;
+    var numberOfPagination = 12;
 
     console.log("pagination number: " + totalPagination);
 
@@ -162,11 +162,19 @@ function pagination(page, per_page, total) {
 
     console.log("remainer: " + remainer);
 
+    
     var beginNumber = page - (page % numberOfPagination) + 1;
+
+    if(remainer === 0){
+        beginNumber -= numberOfPagination;        
+    }        
 
     console.log("beginNumber: " + beginNumber);
 
     var lastNumber = page - (page % numberOfPagination) + numberOfPagination;
+    if(remainer === 0){
+        lastNumber -= numberOfPagination;        
+    }   
 
     console.log("lastNumber: " + lastNumber);
 
@@ -188,7 +196,8 @@ function pagination(page, per_page, total) {
         pre.attr("href", "#");
         pre.html("&laquo;");
         pre.click(function () {
-            paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (beginNumber - numberOfPagination));
+            // paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (beginNumber - numberOfPagination));
+            paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (beginNumber - 1));
             console.log("paginationURL later: " + paginationURL);
             connectUrl(paginationURL);
             return;
@@ -197,8 +206,11 @@ function pagination(page, per_page, total) {
         pagenation.append(pre);
     }
 
-    for (var i = 0; i < (lastNumber - beginNumber + 1); i++) {
-        if (remainer === (i + 1)) {
+    for (var i = 0; i < (lastNumber - beginNumber+1); i++) {
+        console.log("i = "+ i);
+
+        if (remainer === (i+1)%numberOfPagination ) {
+            console.log("Here remainer"+remainer);
             var present = $('<a>');
             present.addClass('active');
             present.text(beginNumber + i);
@@ -207,11 +219,11 @@ function pagination(page, per_page, total) {
 
             if (paginationURL.includes('&page=')) {
                 if (remainer === 0) {
-                    
+
                 }
                 paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (beginNumber + i));
 
-            } 
+            }
             // else if (i === (lastNumber - beginNumber) && (lastNumber - beginNumber + 1) === numberOfPagination) {
             //     paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (lastNumber - 1));
 
@@ -219,22 +231,44 @@ function pagination(page, per_page, total) {
             else {
                 paginationURL += '&page=' + (beginNumber + i);
             }
+
             var present = $('<a>');
             present.attr("href", "#");
             present.attr("onclick", "connectUrl('" + paginationURL + "'); return false;");
             present.attr("id", i);
 
-            if(i === (lastNumber - beginNumber) && (lastNumber - beginNumber + 1) === numberOfPagination){
-            // if (remainer === 0) {
-                present.html("&raquo;");
-            } else {
+            // if(i === (lastNumber - beginNumber) && (lastNumber - beginNumber + 1) === numberOfPagination){
+            // // if (remainer === 0) {
+            //     present.html("&raquo;");
+            // } else {
 
-                present.text(beginNumber + i);
-            }
+            present.text(beginNumber + i);
+            // }
 
             pagenation.append(present);
         }
     }
+
+    if (lastNumber !== totalPagination) {
+        if (paginationURL.includes('&page=')) {
+            paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (lastNumber+1));
+
+        }
+        else {
+            paginationURL += '&page=' + (lastNumber+1);
+        }
+
+
+        var present = $('<a>');
+        present.attr("href", "#");
+        present.attr("onclick", "connectUrl('" + paginationURL + "'); return false;");
+        // present.attr("id", i);
+        present.html("&raquo;");
+        pagenation.append(present);
+
+    }
+
+    // if(i === (lastNumber - beginNumber) && (lastNumber - beginNumber + 1) === numberOfPagination){
 }
 
 
