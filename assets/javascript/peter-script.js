@@ -19,6 +19,8 @@ var searchBtn = $('#btn-search');
 var searchResultEl = $('#search-results');
 var rengeEl;
 
+var paginationURL;
+
 
 // https://platform.seatgeek.com/  Event API document
 // Query String:  https://api.seatgeek.com/2/events?client_id=MYCLIENTID
@@ -26,6 +28,7 @@ var rengeEl;
 
 var apiKeyEvent = 'OTQ2MzM3NXwxNjcwMzg3MzgzLjM4MjcwMDQ';
 var eventUrl = 'https://api.seatgeek.com/2/events?client_id=' + apiKeyEvent;
+paginationURL = eventUrl;
 
 // https://api.seatgeek.com/2/venues?client_id=OTQ2MzM3NXwxNjcwMzg3MzgzLjM4MjcwMDQ
 
@@ -85,21 +88,23 @@ function searchHandle(event) {
     }
 
     var types = '';
-    
+
 
     $('select option:selected').each(function (i, selectedElement) {
-        types += '&type='+$(selectedElement).val();                
+        types += '&type=' + $(selectedElement).val();
     });
 
 
     apiUrl += types;    // search by type
+    // apiUrl += "&page=2";
 
-   
+
     // if(desc){
     //     apiUrl += '&sort=datetime_utc.desc';     // Sorting to Desc
     // }
 
     console.log("dateURL: " + apiUrl);
+    paginationURL = apiUrl;
 
     connectUrl(apiUrl); // sending API url
 }
@@ -107,6 +112,7 @@ function searchHandle(event) {
 // Recevie apiUrl and call displayEvent();
 function connectUrl(url) {
 
+    console.log("Connect URL: " + url);
     fetch(url)
         .then(function (response) {
             if (response.ok) {
@@ -145,12 +151,96 @@ function errorMessage() {
 
 }
 
+function pagination(page, per_page, total) {
+
+    var totalPagination = parseInt(total / per_page) + 1;
+    var numberOfPagination = 10;
+
+    console.log("pagination number: " + totalPagination);
+
+    var remainer = page % numberOfPagination;
+
+    console.log("remainer: " + remainer);
+
+    var beginNumber = page - (page % numberOfPagination) + 1;
+
+    console.log("beginNumber: " + beginNumber);
+
+    var lastNumber = page - (page % numberOfPagination) + numberOfPagination;
+
+
+    if (lastNumber > totalPagination) {
+        lastNumber = totalPagination;
+    }
+
+    console.log("lastNumber: " + lastNumber);
+
+    var pagenation = $('.pagination');
+    pagenation.empty();
+    
+    console.log("paginationURL before: "+paginationURL);
+
+    if (beginNumber !== 1) {
+           
+        var pre = $('<a>');
+        pre.attr("href", "#");
+        pre.html("&laquo;");
+        pre.click(function () {
+            paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (beginNumber - numberOfPagination));
+            console.log("paginationURL later: "+paginationURL);
+            connectUrl(paginationURL);
+            return ;
+        });
+
+        pagenation.append(pre);
+    }
+
+    for (var i = 0; i < (lastNumber - beginNumber + 1); i++) {
+        if (remainer === (i+1)) {
+            var present = $('<a>');
+            present.addClass('active');
+            present.text(beginNumber+i);
+            pagenation.append(present);
+        } else {
+            
+            if(paginationURL.includes('&page=')){
+                paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (beginNumber + i));
+            } else {
+                paginationURL += '&page=' + (beginNumber + i);
+            }
+            var present = $('<a>');
+            present.attr("href", "#");
+            present.attr("onclick", "connectUrl('"+paginationURL+"'); return false;");
+            present.attr("id",i);
+
+            if(i === (lastNumber - beginNumber)){
+                present.html("&raquo;");
+            } else {
+                present.text(beginNumber+i);
+            }               
+       
+            pagenation.append(present);
+        }
+    }
+}
+
 
 // display event list on the screen;
 function displayEvent(data) {
     console.log(data);
     searchResultEl.empty();
-    var events = data.events;   // 
+    var events = data.events;
+    var meta = data.meta;
+    var total = meta.total;
+    var page = meta.page;
+    var per_page = meta.per_page;
+
+    console.log("Total item: " + total);
+    console.log("Page: " + page);
+    console.log("Per_page: " + per_page);
+
+    pagination(page, per_page, total);
+
 
     if (events.length === 0) {
         noData();
@@ -274,8 +364,8 @@ function displayDetails(events) {
     // var closeBtn = $('<button id="closeBtn">').text('Close');
 
     eventDetailBox.append(eventDate, place, address, eventType, nameOfPerformer, performerSlug, eventScore, ticket, eventUrl);
-    eventInformation.append(eventTitle, eventDetailBox);   
-        
+    eventInformation.append(eventTitle, eventDetailBox);
+
     eventDetails.append(imgContainer, eventInformation);
 
     // searchResultEl.append(eventDetails);    
@@ -376,3 +466,13 @@ $('#closeBtn').on('click', function () {
     console.log("close");
 });
 
+
+
+
+// Pagination Js
+
+
+
+
+
+//////////////////////////// Pagination End
