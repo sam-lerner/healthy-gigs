@@ -168,6 +168,8 @@ function pagination(page, per_page, total) {
 
     var lastNumber = page - (page % numberOfPagination) + numberOfPagination;
 
+    console.log("lastNumber: " + lastNumber);
+
 
     if (lastNumber > totalPagination) {
         lastNumber = totalPagination;
@@ -177,48 +179,59 @@ function pagination(page, per_page, total) {
 
     var pagenation = $('.pagination');
     pagenation.empty();
-    
-    console.log("paginationURL before: "+paginationURL);
+
+    console.log("paginationURL before: " + paginationURL);
 
     if (beginNumber !== 1) {
-           
+
         var pre = $('<a>');
         pre.attr("href", "#");
         pre.html("&laquo;");
         pre.click(function () {
             paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (beginNumber - numberOfPagination));
-            console.log("paginationURL later: "+paginationURL);
+            console.log("paginationURL later: " + paginationURL);
             connectUrl(paginationURL);
-            return ;
+            return;
         });
 
         pagenation.append(pre);
     }
 
     for (var i = 0; i < (lastNumber - beginNumber + 1); i++) {
-        if (remainer === (i+1)) {
+        if (remainer === (i + 1)) {
             var present = $('<a>');
             present.addClass('active');
-            present.text(beginNumber+i);
+            present.text(beginNumber + i);
             pagenation.append(present);
         } else {
-            
-            if(paginationURL.includes('&page=')){
+
+            if (paginationURL.includes('&page=')) {
+                if (remainer === 0) {
+                    
+                }
                 paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (beginNumber + i));
-            } else {
+
+            } 
+            // else if (i === (lastNumber - beginNumber) && (lastNumber - beginNumber + 1) === numberOfPagination) {
+            //     paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (lastNumber - 1));
+
+            // } 
+            else {
                 paginationURL += '&page=' + (beginNumber + i);
             }
             var present = $('<a>');
             present.attr("href", "#");
-            present.attr("onclick", "connectUrl('"+paginationURL+"'); return false;");
-            present.attr("id",i);
+            present.attr("onclick", "connectUrl('" + paginationURL + "'); return false;");
+            present.attr("id", i);
 
-            if(i === (lastNumber - beginNumber)){
+            if(i === (lastNumber - beginNumber) && (lastNumber - beginNumber + 1) === numberOfPagination){
+            // if (remainer === 0) {
                 present.html("&raquo;");
             } else {
-                present.text(beginNumber+i);
-            }               
-       
+
+                present.text(beginNumber + i);
+            }
+
             pagenation.append(present);
         }
     }
