@@ -15,43 +15,39 @@
     <!-- <link rel="stylesheet" href="assets/css/sam-style.css"> -->
     <link rel="stylesheet" href="./assets/css/style.css">
     <!-- <link rel="stylesheet" href="./assets/css/styleJackie.css"> -->
-    
+
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
-    
+
     <!-- <style>
     body { margin: 0; padding: 0; }
     #map { position: relative; top: 0; bottom: 0; width: 400px; height: 300px; }
     </style> -->
-     <!-- <link rel="stylesheet" href="./assets/css/peter-sytle.css">  -->
+    <!-- <link rel="stylesheet" href="./assets/css/peter-sytle.css">  -->
     <title>Healthy Gigs</title>
 </head>
 
 <body class="blue lighten-5 white-text">
-    <nav class="nav-extended blue lighten-2">
-        <div class="nav-content center">
-            <a class="nav-title">Healthy Gigs</a>
-        </div>
-        <div class="nav-wrapper">
-            <p id="tag" class="center">Welcome to our site. Please enter in your search
-                criteria to find a gig
-                near you!</p>
-        </div>
+    <header class="page-header">
+        <nav class="nav-extended blue lighten-2">
+            <div class="nav-content center">
+                <a class="nav-title">Healthy Gigs</a>
+            </div>
 
 
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-            <div class="btn-content">
-                <button id="closeBtn">Close</button>
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+                <div class="btn-content">
+                    <button id="closeBtn">Close</button>
+                </div>
+                <!-- Modal content -->
+                <div class="modal-content">
+
+                </div>
             </div>
-            <!-- Modal content -->
-            <div class="modal-content">
-image
-            </div>
-        </div>
-        <!-- The Modal End-->
-    </nav>
+            <!-- The Modal End-->
+        </nav>
+    </header>
     <main>
-
         <ul id="slide-out" class="sidenav blue darken-3 z-depth-5">
             <li>
                 <div class="user-view">
@@ -64,10 +60,10 @@ image
                                 <label for="event-name">Event Name</label>
                             </div>
                             <div class="input-field row">
-                                <select name="type" multiple id="event-type">
+                                <select class="column-s12" name="type" multiple id="event-type">
                                     <option value="" disabled>Event Type</option>
                                     <option value="concert" id="concerts">Concerts</option>
-                                    <option value="family" id="familys">Familys</option>
+                                    <option value="family" id="familys">Family</option>
                                     <option value="theater" id="theater">Theater</option>
                                     <option value="sports" id="sports">Sports</option>
                                     <option value="comedy" id="comedy">Comedy</option>
@@ -111,9 +107,19 @@ image
                     </div>
             </li>
         </ul>
-        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <div class="nav-wrapper blue lighten-2 row">
+            <a href="#" data-target="slide-out" class="col s2 sidenav-trigger white-text"><i
+                    class="medium material-icons">search</i></a>
+            <p id="tag" class="col s8 center">Welcome to our site. Healthy Gigs is a website dedicated to finding safe
+                events during the COVID-19 pandemic. The website allows the user to search for events based on type,
+                location or date. When the event results display, the user is also presented with information on COVID
+                levels in the area where the events are.</p>
+            <div class="col s2">
+
+            </div>
+        </div>
         <div class="parallax-container">
-            <div class="parallax responsive"><img src="./assets/images/top-image.jpeg"></div>
+            <div class="parallax"><img src="./assets/images/concert-background.jpeg"></div>
         </div>
         <div class="row">
             <!-- Overall container for the results. To the left will be a darker bar with recent searches. The Middle will have a window that displays the search results. Below the results field will be information about current COVID conditions in the area.  -->

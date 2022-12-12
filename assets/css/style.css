@@ -308,11 +308,6 @@ body {
   font-weight: bold;
 }
 
-.event-type {
- word-wrap: break-word;
-}
-
-.responsive {
-  width: 100%;
-  height: auto;
+.parallax-container{
+  height: 15vh;
 }
