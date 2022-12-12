@@ -25,7 +25,7 @@ body {
 
 .event-image {
   flex: 1;
-
+  height: auto
 
 }
 
@@ -306,4 +306,13 @@ body {
   text-align: center;
   font-size: 25px;
   font-weight: bold;
+}
+
+.event-type {
+ word-wrap: break-word;
+}
+
+.responsive {
+  width: 100%;
+  height: auto;
 }

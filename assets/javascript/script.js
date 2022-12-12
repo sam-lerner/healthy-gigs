@@ -395,7 +395,7 @@ function covidAppend(data) {
     var countyEl = $('<h5>').text(county);
     var levelEl = $('<p>').text("Covid Level: " + level);
     var covidCaseEl = $('<p>').text("Cases Per 100K: " + covidCase);
-    var popEl = $('<p>').text("County Populataion: " + pop);
+    var popEl = $('<p>').text("County Population: " + pop);
     var updateDayEl = $('<p>').text("Last Updated: " + dayjs(updateDay).format('MMM D, YYYY [-] hh:mm a'));
 
 
