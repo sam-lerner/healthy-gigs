@@ -1,16 +1,6 @@
 var intials = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
 var state = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virgina', 'Wisconsin', 'Wyoming']
 
-// mapboxgl access token
-mapboxgl.accessToken = 'pk.eyJ1IjoiYmxhbmtldDIwMDAiLCJhIjoiY2xia2l5cmp0MDBxZTN2bDhzeWhtaDJ2ZSJ9.asUNuniNnHFj4dotCMH40g';
-const map = new mapboxgl.Map({
-    container: 'map', // container ID
-    // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-    style: 'mapbox://styles/mapbox/streets-v12', // style URL
-    center: [-74.5, 40], // starting position [lng, lat]
-    zoom: 9 // starting zoom
-});
-
 console.log("Begin");
 
 var modal = document.getElementById("myModal");
@@ -291,6 +281,7 @@ function displayDetails(events) {
     var eventImg = $('<img height="400" width="400">');
     eventImg.attr('src', image);
     imgContainer.append(eventImg);
+    imgContainer.append($('<div id ="map">'));
 
     var eventInformation = $('<div class="detail-information">');
     var eventTitle = $('<h3>').text(title);
@@ -319,26 +310,16 @@ function displayDetails(events) {
     // geoPostCode(postalCode,state);   // display covid data
     geoPostCode('08852', 'New Jersey');
 
-
     mapboxgl.accessToken = 'pk.eyJ1IjoiYmxhbmtldDIwMDAiLCJhIjoiY2xia2oydWFnMDByOTQwcG1iMHBkbnh5eiJ9.Yu_vJDHEbQJ1Yhmz91_E7g';
-    const map = new mapboxgl.Map({
-        container: 'map', // container ID
-        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-        style: 'mapbox://styles/mapbox/streets-v12', // style URL
-        center: [-98.5, 40], // starting position [lng, lat]
-        zoom: 9 // starting zoom
-    });
+        const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+            style: 'mapbox://styles/mapbox/streets-v12', // style URL
+            center: [lon, lat], // starting position [lng, lat]
+            zoom: 9 // starting zoom
+        });
 
-
-    //add
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYmxhbmtldDIwMDAiLCJhIjoiY2xia2oydWFnMDByOTQwcG1iMHBkbnh5eiJ9.Yu_vJDHEbQJ1Yhmz91_E7g';
-    const map = new mapboxgl.Map({
-        container: 'map', // container ID
-        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-        style: 'mapbox://styles/mapbox/streets-v12', // style URL
-        center: [-98.5, 40], // starting position [lng, lat]
-        zoom: 9 // starting zoom
-    });
+        const marker1 = new mapboxgl.Marker().setLngLat([lon, lat]).addTo(map).setPopup(new mapboxgl.Popup().setHTML(placeName));
 }
 
 
@@ -686,3 +667,5 @@ $('.modal-content').on('click', '#event-save-button', handleSaveButton);
 
 storeBtnListEl.on('click', '.btn', handleButton); // cilck on city name button
 
+
+showBtn(); // Saved events show

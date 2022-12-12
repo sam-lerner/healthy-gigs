@@ -12,6 +12,10 @@ body {
 }
 
 
+.button-collapse {
+  color: #039be5;
+}
+
 
 .event-details {
   display: flex;
@@ -192,4 +196,114 @@ body {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+
+/* Pagination Begin */
+
+
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Pagination links */
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+/* Style the active/current link */
+.pagination a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+/* Add a grey background color on mouse-over */
+.pagination a.save-button:not(.active) {
+  background-color: #ddd;
+}
+
+/* Pagination End */
+
+/* Saved Button */
+.saved-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 5%;
+  right: 0;
+  width: 200px;
+  /* border: 2px solid #73AD21; */
+}
+
+
+.reset {
+
+  margin: 5px 0;
+  align-items: center;
+  appearance: none;
+  background-color: #80b2d3;
+  background-image: linear-gradient(1deg, #1f2257, #708796 99%);
+  background-size: calc(100% + 20px) calc(100% + 20px);
+  border-radius: 100px;
+  border-width: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: CircularStd, sans-serif;
+  font-size: 1rem;
+  height: auto;
+  justify-content: center;
+  line-height: 1.5;
+  padding: 6px 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color .2s, background-position .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.reset:active,
+.reset:focus {
+  outline: none;
+}
+
+.reset:hover {
+  background-position: -20px -20px;
+}
+
+.reset:focus:not(:active) {
+  box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
+}
+
+/* #event-save-button {
+  position: relative;
+} */
+
+
+.message-container {
+  z-index: 1;
+  /* width: 300px;
+  height: 200px; */
+  /* background: #149BF3; */
+  /* opacity: .4;  */
+  position: fixed;
+  top: 50%;
+  color: #1f2257;  
+  width: 100%;
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
 }
