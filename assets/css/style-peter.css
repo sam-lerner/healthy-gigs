@@ -1,0 +1,369 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#map {
+  position: relative;
+  top: 0;
+  bottom: 0;
+  width: 400px;
+  height: 300px;
+}
+
+
+.button-collapse {
+  color: #039be5;
+}
+
+.results-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 80%;
+  margin: auto;
+}
+
+
+
+.event-details {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  margin: 20px;
+
+}
+
+.event-image {
+  flex: 1;
+  display: flex;
+}
+
+/* .event-image a, .event-image img{
+  margin: 0;
+  padding: 0;
+
+}  */
+
+.event-information {
+  flex: 4;
+  padding: 10px;
+  color: black;
+
+}
+
+.event-information h4 {
+  margin: 15px 10px;
+}
+
+.event-information p {
+  margin: 10px;
+}
+
+.detail-container {
+  display: flex;
+}
+
+
+.image-container {
+  flex: 2;
+}
+
+.detail-information {
+  flex: 3;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 10px;
+  color: black;
+}
+
+.detail-information h3 {
+  flex: 0 0 100%;
+  margin: 15px 0;
+}
+
+.detail-information p {
+  line-height: 1.5;
+  margin: 5px 0;
+  padding: 0;
+}
+
+.detail-box {
+  flex: 0 0 50%;
+}
+
+.covid-detail {
+  flex: 0 0 50%;
+}
+
+.save-button-container {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.save-button {
+
+  margin: 5px 0;
+  align-items: center;
+  appearance: none;
+  background-color: #3EB2FD;
+  background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
+  background-size: calc(100% + 20px) calc(100% + 20px);
+  border-radius: 10px;
+  border-width: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: CircularStd, sans-serif;
+  font-size: 1rem;
+  height: auto;
+  justify-content: center;
+  line-height: 1.5;
+  padding: 6px 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color .2s, background-position .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.save-button:active,
+.save-button:focus {
+  outline: none;
+}
+
+.save-button:hover {
+  background-position: -20px -20px;
+}
+
+.save-button:focus:not(:active) {
+  box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
+}
+
+
+
+.no-data {
+  text-align: center;
+  color: rgb(165, 40, 40);
+  line-height: 2;
+}
+
+
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /*Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  color: black;
+}
+
+.modal-content a {
+  color: rgb(165, 40, 40);
+  font-weight: bold;
+}
+
+.modal-content a.save-button {
+  text-decoration: underline;
+}
+
+/* The Close Button */
+.btn-content {
+  display: flex;
+  justify-content: center;
+}
+
+#closeBtn {
+  margin: 0 auto;
+  color: #aaaaaa;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#closeBtn.save-button,
+#closeBtn:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* Pagination Begin */
+
+
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+}
+
+pagination {
+  margin: auto;
+}
+
+/* Pagination links */
+.pagination a {
+  color: black;
+  /* float: left; */
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+/* Style the active/current link */
+.pagination a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+/* Add a grey background color on mouse-over */
+.pagination a.save-button:not(.active) {
+  background-color: #ddd;
+}
+
+/* Pagination End */
+
+/* Saved Button */
+.saved-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 5%;
+  right: 0;
+  width: 200px;
+  /* border: 2px solid #73AD21; */
+}
+
+
+.reset {
+
+  margin: 5px 0;
+  align-items: center;
+  appearance: none;
+  background-color: #80b2d3;
+  background-image: linear-gradient(1deg, #1f2257, #708796 99%);
+  background-size: calc(100% + 20px) calc(100% + 20px);
+  border-radius: 100px;
+  border-width: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: CircularStd, sans-serif;
+  font-size: 1rem;
+  height: auto;
+  justify-content: center;
+  line-height: 1.5;
+  padding: 6px 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color .2s, background-position .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.reset:active,
+.reset:focus {
+  outline: none;
+}
+
+.reset:hover {
+  background-position: -20px -20px;
+}
+
+.reset:focus:not(:active) {
+  box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
+}
+
+/* #event-save-button {
+  position: relative;
+} */
+
+
+.message-container {
+  z-index: 1;
+  /* width: 300px;
+  height: 200px; */
+  /* background: #149BF3; */
+  /* opacity: .4;  */
+  position: fixed;
+  top: 50%;
+  color: #1f2257;
+  width: 100%;
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.parallax-container {
+  height: 15vh;
+}
+
+
+
+
+/* media query for smaller screens */
+@media screen and (max-width: 992px) {
+
+
+
+  .event-image {
+    flex: 0 0 100%;
+    justify-content: center;
+
+
+  }
+
+  .event-information {
+    flex: 0 0 100%;
+
+  }
+
+  .results-area {
+    width: 100%;
+    
+  }
+
+}
