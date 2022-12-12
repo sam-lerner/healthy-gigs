@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <!-- Need a stylesheet that isn't bootstrap -->
+    <!-- Compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Josefin+Sans&family=Nunito+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/materialize.css">
+    <!-- <link rel="stylesheet" href="assets/css/sam-style.css"> -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- <link rel="stylesheet" href="./assets/css/styleJackie.css"> -->
+
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+
+    <!-- <style>
+    body { margin: 0; padding: 0; }
+    #map { position: relative; top: 0; bottom: 0; width: 400px; height: 300px; }
+    </style> -->
+    <!-- <link rel="stylesheet" href="./assets/css/peter-sytle.css">  -->
+    <title>Healthy Gigs</title>
+</head>
+
+<body class="blue lighten-5 white-text">
+    <header class="page-header">
+        <nav class="nav-extended blue lighten-2">
+            <div class="nav-content center">
+                <a class="nav-title">Healthy Gigs</a>
+            </div>
+
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+                <div class="btn-content">
+                    <button id="closeBtn"><i class="material-icons">close</i></button>
+                </div>
+                <!-- Modal content -->
+                <div class="modal-content">
+
+                </div>
+            </div>
+            <!-- The Modal End-->
+        </nav>
+    </header>
+    <main>
+        <ul id="slide-out" class="sidenav blue darken-3 z-depth-5">
+            <li>
+                <div class="user-view">
+                    <div id="search-bar">
+                        <h6 class="center">Search for your event!</h6>
+
+                        <form id="search-form">
+                            <div class="row input-field">
+                                <input id="event-name" type="text" class="validate">
+                                <label for="event-name">Event Name</label>
+                            </div>
+                            <div class="input-field row">
+                                <select class="column-s12" name="type" multiple id="event-type">
+                                    <option value="" disabled>Event Type</option>
+                                    <option value="concert" id="concerts">Concerts</option>
+                                    <option value="family" id="familys">Family</option>
+                                    <option value="theater" id="theater">Theater</option>
+                                    <option value="sports" id="sports">Sports</option>
+                                    <option value="comedy" id="comedy">Comedy</option>
+                                    <option value="music_festival" id="music_festival">Music Festival</option>
+                                    <option value="broadway_tickets_national" id="broadway_tickets_national">Broadway
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="row input-field">
+                                <input id="location-input" type="text" class="validate">
+                                <label for="location-input">ZIP Code</label>
+                            </div>
+                            <div class="input-field row">
+                                <select single>
+                                    <option value="" disabled selected>Maximum Distance (miles)</option>
+                                    <option value="1" id="ten-miles">10</option>
+                                    <option value="2" id="twenty-five-miles">25 </option>
+                                    <option value="3" id="fifty-miles">50</option>
+                                </select>
+                            </div>
+                            <div class="row input-field">
+                                <input type="date" id="start-date">
+                                <label for="start-date">Start Date:</label>
+                            </div>
+                            <div class="row input-field">
+                                <input type="date" id="end-date">
+                                <label for="end-date">End Date:</label>
+                            </div>
+                            <div class="input-field row">
+                                <select single>
+                                    <option value="" disabled selected>Sort Results by: </option>
+                                    <option value="1" id="nearest">Nearest</option>
+                                    <option value="2" id="farthest">Farthest</option>
+                                    <option value="3" id="soonest">Soonest</option>
+                                    <option value="4" id="latest">Latest</option>
+                                </select>
+                            </div>
+                            <!-- Button for search -->
+                            <button type='submit' class="row sidenav-close" id="btn-search">Search</button>
+                        </form>
+                    </div>
+            </li>
+        </ul>
+        <div class="nav-wrapper blue lighten-2 row">
+            <a href="#" data-target="slide-out" class="col s2 sidenav-trigger white-text"><i
+                    class="medium material-icons">search</i></a>
+            <p id="tag" class="col s8 center">Welcome to our site. Healthy Gigs is a website dedicated to finding safe
+                events during the COVID-19 pandemic. The website allows you to search for events based on type, location
+                or date. When the event results display, you will also be presented with information on COVID levels in
+                the area where your events are.</p>
+            <div class="col s2">
+              
+            </div>
+        </div>
+        <div class="parallax-container">
+            <div class="parallax"><img src="./assets/images/concert-background.jpeg"></div>
+        </div>
+        <div class="row">
+            <!-- Overall container for the results. To the left will be a darker bar with recent searches. The Middle will have a window that displays the search results. Below the results field will be information about current COVID conditions in the area.  -->
+            <div class="col s12 m3 l2">
+
+            </div>
+            <div class="col s8 m6 l8" id="results-area">
+                <!-- Larger panel  -->
+                <div id="search-results">
+                    <!-- Results populate here -->
+                    <div>
+                        <div id="image">
+
+                        </div>
+                        <div id="details">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Pagination Begin -->
+                <div class="pagination-container">
+                    <div class="pagination">
+                        <!-- <a href="#">&laquo;</a>
+                            <a href="#">1</a>
+                            <a class="active" href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#">5</a>
+                            <a href="#">6</a>
+                            <a href="#">&raquo;</a> -->
+                    </div>
+                </div>
+                <!-- Pagination End -->
+
+                <!-- Saved Button -->
+
+                <div class="saved-button-container">
+                    Saved Button
+                </div>
+
+                <!-- Saved Button End-->
+
+                <!-- Message -->
+
+                <div class="message-container">
+
+                </div>
+
+                <!-- Message -->
+            </div>
+            <div class="col s4 m3 l2">
+
+            </div>
+        </div>
+        <div class="parallax-container">
+            <div class="parallax"><img src="./assets/images/concert-background.jpeg"></div>
+        </div>
+    </main>
+    <footer class="page-footer blue lighten-2 center">
+        <h6>Stay safe and have fun!</h6>
+    </footer>
+    <!-- Dayjs  -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+        integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+    <script src="./assets/javascript/materialize.js"></script>
+    <script src="./assets/javascript/sam-style-components.js"></script>
+    <script src="./assets/javascript/script.js"></script>
+    <!-- <script src="./assets/javascript/peter-script.js"></script>     -->
+    <!-- <script src="assets/javascript/jake-map-merge-peter.js"></script> -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+</body>
+
+</html>
