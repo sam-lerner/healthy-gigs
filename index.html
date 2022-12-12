@@ -10,6 +10,7 @@
     <!-- Compiled and minified CSS -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/materialize.css">
     <link rel="stylesheet" href="assets/css/sam-style.css">
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -42,7 +43,7 @@
         <!-- The Modal End-->
     </nav>
     <main>
-        
+
         <ul id="slide-out" class="sidenav blue darken-3 z-depth-5">
             <li>
                 <div class="user-view">
@@ -57,14 +58,27 @@
                             <div class="input-field row">
                                 <select multiple>
                                     <option value="" disabled selected>Event Type</option>
-                                    <option value="1" id="concerts">Concerts</option>
-                                    <option value="2" id="sporting-events">Sporting Events</option>
+                                    <option value="1" id="concerts">Concert</option>
+                                    <option value="2" id="music-festival">Music Festival</option>
                                     <option value="3" id="theater">Theater</option>
+                                    <option value="4" id="sporting-events">Sporting Events</option>
+                                    <option value="5" id="golf">Golf</option>
+                                    <option value="6" id="family">Family</option>
+                                    <option value="7" id="comedy">Comedy</option>
+                                    <option value="8" id="dance">Dance</option>
                                 </select>
                             </div>
                             <div class="row input-field">
                                 <input id="location-input" type="text" class="validate">
                                 <label for="location-input">ZIP Code</label>
+                            </div>
+                            <div class="input-field row">
+                                <select single>
+                                    <option value="" disabled selected>Maximum Distance (miles)</option>
+                                    <option value="1" id="ten-miles">10</option>
+                                    <option value="2" id="twenty-five-miles">25 </option>
+                                    <option value="3" id="fifty-miles">50</option>
+                                </select>
                             </div>
                             <div class="row input-field">
                                 <input type="date" id="start-date">
@@ -72,7 +86,16 @@
                             </div>
                             <div class="row input-field">
                                 <input type="date" id="end-date">
-                                <label for="end-date">Start Date:</label>
+                                <label for="end-date">End Date:</label>
+                            </div>
+                            <div class="input-field row">
+                                <select single>
+                                    <option value="" disabled selected>Sort Results by: </option>
+                                    <option value="1" id="nearest">Nearest</option>
+                                    <option value="2" id="farthest">Farthest</option>
+                                    <option value="3" id="soonest">Soonest</option>
+                                    <option value="4" id="latest">Latest</option>
+                                </select>
                             </div>
                             <!-- Button for search -->
                             <button type='submit' class="row sidenav-close" id="btn-search">Search</button>
@@ -80,7 +103,7 @@
                     </div>
             </li>
         </ul>
-        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">Start your search!</i></a>
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <div class="parallax-container">
             <div class="parallax"><img src="./assets/images/top-image.jpeg"></div>
         </div>
@@ -126,6 +149,7 @@
     <script src="./assets/javascript/materialize.js"></script>
     <script src="./assets/javascript/sam-style-components.js"></script>
     <script src="./assets/javascript/script.js"></script>
+    <script src="./assets/javascript/peter-script.js"></script>    
 </body>
 
 </html>
