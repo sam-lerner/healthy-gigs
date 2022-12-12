@@ -228,7 +228,9 @@ function displayDetails(events){
     var imgContainer = $('<div class="image-container">');
     var eventImg = $('<img height="400" width="400">');
     eventImg.attr('src', image);
-    imgContainer.append(eventImg);
+    imgContainer.append(eventImg);    
+    
+
 
     var eventInformation = $('<div class="detail-information">');
     var eventTitle = $('<h3>').text(title);
@@ -251,6 +253,7 @@ function displayDetails(events){
 
     // geoPostCode(postalCode,state);
     geoPostCode('08852','New Jersey');
+    
 }
 
 
