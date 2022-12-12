@@ -134,4 +134,8 @@ nav {
     color: black;
     max-width: max-content;
   }
+    .hamburger {
+        display: block;
+    }
+  
 
