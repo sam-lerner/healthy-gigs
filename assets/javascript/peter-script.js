@@ -17,10 +17,15 @@ var familyEl = $('#familys'); //Event type: family-event
 var theaterEl = $('#theater');   // Event type: theater
 var searchBtn = $('#btn-search');
 var searchResultEl = $('#search-results');
+
+var storeBtnListEl = $('.saved-button-container');    // saved button list
 var rengeEl;
+
+
 
 var paginationURL;
 
+var eventSave;
 
 // https://platform.seatgeek.com/  Event API document
 // Query String:  https://api.seatgeek.com/2/events?client_id=MYCLIENTID
@@ -90,13 +95,12 @@ function searchHandle(event) {
     var types = '';
 
 
-    $('select option:selected').each(function (i, selectedElement) {
+    $('select option:selected').each(function (i, selectedElement) {    //  Get elements from selected option
         types += '&type=' + $(selectedElement).val();
     });
 
 
-    apiUrl += types;    // search by type
-    // apiUrl += "&page=2";
+    apiUrl += types;    // search by type   
 
 
     // if(desc){
@@ -151,125 +155,7 @@ function errorMessage() {
 
 }
 
-function pagination(page, per_page, total) {
 
-    var totalPagination = parseInt(total / per_page) + 1;
-    var numberOfPagination = 12;
-
-    console.log("pagination number: " + totalPagination);
-
-    var remainer = page % numberOfPagination;
-
-    console.log("remainer: " + remainer);
-
-    
-    var beginNumber = page - (page % numberOfPagination) + 1;
-
-    if(remainer === 0){
-        beginNumber -= numberOfPagination;        
-    }        
-
-    console.log("beginNumber: " + beginNumber);
-
-    var lastNumber = page - (page % numberOfPagination) + numberOfPagination;
-    if(remainer === 0){
-        lastNumber -= numberOfPagination;        
-    }   
-
-    console.log("lastNumber: " + lastNumber);
-
-
-    if (lastNumber > totalPagination) {
-        lastNumber = totalPagination;
-    }
-
-    console.log("lastNumber: " + lastNumber);
-
-    var pagenation = $('.pagination');
-    pagenation.empty();
-
-    console.log("paginationURL before: " + paginationURL);
-
-    if (beginNumber !== 1) {
-
-        var pre = $('<a>');
-        pre.attr("href", "#");
-        pre.html("&laquo;");
-        pre.click(function () {
-            // paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (beginNumber - numberOfPagination));
-            paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (beginNumber - 1));
-            console.log("paginationURL later: " + paginationURL);
-            connectUrl(paginationURL);
-            return;
-        });
-
-        pagenation.append(pre);
-    }
-
-    for (var i = 0; i < (lastNumber - beginNumber+1); i++) {
-        console.log("i = "+ i);
-
-        if (remainer === (i+1)%numberOfPagination ) {
-            console.log("Here remainer"+remainer);
-            var present = $('<a>');
-            present.addClass('active');
-            present.text(beginNumber + i);
-            pagenation.append(present);
-        } else {
-
-            if (paginationURL.includes('&page=')) {
-                if (remainer === 0) {
-
-                }
-                paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (beginNumber + i));
-
-            }
-            // else if (i === (lastNumber - beginNumber) && (lastNumber - beginNumber + 1) === numberOfPagination) {
-            //     paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (lastNumber - 1));
-
-            // } 
-            else {
-                paginationURL += '&page=' + (beginNumber + i);
-            }
-
-            var present = $('<a>');
-            present.attr("href", "#");
-            present.attr("onclick", "connectUrl('" + paginationURL + "'); return false;");
-            present.attr("id", i);
-
-            // if(i === (lastNumber - beginNumber) && (lastNumber - beginNumber + 1) === numberOfPagination){
-            // // if (remainer === 0) {
-            //     present.html("&raquo;");
-            // } else {
-
-            present.text(beginNumber + i);
-            // }
-
-            pagenation.append(present);
-        }
-    }
-
-    if (lastNumber !== totalPagination) {
-        if (paginationURL.includes('&page=')) {
-            paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (lastNumber+1));
-
-        }
-        else {
-            paginationURL += '&page=' + (lastNumber+1);
-        }
-
-
-        var present = $('<a>');
-        present.attr("href", "#");
-        present.attr("onclick", "connectUrl('" + paginationURL + "'); return false;");
-        // present.attr("id", i);
-        present.html("&raquo;");
-        pagenation.append(present);
-
-    }
-
-    // if(i === (lastNumber - beginNumber) && (lastNumber - beginNumber + 1) === numberOfPagination){
-}
 
 
 // display event list on the screen;
@@ -282,22 +168,22 @@ function displayEvent(data) {
     var page = meta.page;
     var per_page = meta.per_page;
 
-    console.log("Total item: " + total);
-    console.log("Page: " + page);
-    console.log("Per_page: " + per_page);
+    // console.log("Total item: " + total);
+    // console.log("Page: " + page);
+    // console.log("Per_page: " + per_page);
 
-    pagination(page, per_page, total);
+    pagination(page, per_page, total);  // pagination function
 
 
+    // If there is no searching data
     if (events.length === 0) {
         noData();
-        console.log("No Data");
+        // console.log("No Data");
     }
 
     for (let i = 0; i < events.length; i++) {
-        var type = events[i].type;
-        // console.log("Event["+i+"] = " +events[i]);
-        // console.log("Type: "+type);
+        
+        var type = events[i].type;        
         var title = events[i].title;
         var url = events[i].url;
         var score = events[i].score;
@@ -317,8 +203,7 @@ function displayEvent(data) {
         var performers = events[i].performers[0];   // performers
         var performerName = performers.name;
         var image = performers.image;
-
-        // console.log("City: "+city);
+       
 
         var eventDetails = $('<div class="event-details">');
         var eventImage = $('<div>');
@@ -326,7 +211,7 @@ function displayEvent(data) {
         imgA.attr("href", "#");
         imgA.click(function () {     // sending events[i] to displayDetails
             displayDetails(events[i]);
-            modal.style.display = "block";
+            // modal.style.display = "block";
         });
 
         var img = $('<img id=' + i + '>');
@@ -340,13 +225,11 @@ function displayEvent(data) {
         titleA.attr("href", "#");
         titleA.click(function () {
             displayDetails(events[i]);  // sending events[i] to displayDetails
-            modal.style.display = "block";
+            // modal.style.display = "block";
         });
 
         titleA.text(title);
         eventTitle.append(titleA);
-
-
 
         var eventDate = $('<p>').text(dayjs(date).format('MMM D, YYYY') + ' / Place: ' + placeName + ' / ' + address + ', ' + displayLocation);
         var eventPerfomer = $('<p>').text('Event Type: ' + type + " / Performer: " + performerName);
@@ -359,11 +242,16 @@ function displayEvent(data) {
     }
 }
 
+
+// display detail information on the modal
 function displayDetails(events) {
+
+    modal.style.display = "block";
+    eventSave = events; // Save event;
+
     $('.modal-content').empty();
 
-    var type = events.type;
-    console.log("Type: " + type);
+    var type = events.type;    
     var title = events.title;
     var url = events.url;
     var score = events.score;
@@ -372,7 +260,7 @@ function displayDetails(events) {
 
     var venue = events.venue;    // venue
     // var state = venue.state;
-    var state = intialConvert(venue.state);
+    var state = intialConvert(venue.state); // convert state name  ex) NJ -> New Jersey
     var postalCode = venue.postal_code;
     var placeName = venue.name;
     var lat = venue.location.lat;
@@ -386,7 +274,6 @@ function displayDetails(events) {
     var image = performers.image;
     var ticket = performers.url;
     var slug = performers.slug;
-
 
 
     var eventDetails = $('<div class="row detail-container">');
@@ -408,17 +295,18 @@ function displayDetails(events) {
     var eventScore = $('<p>').text("Score: " + score);
     var ticket = $('<p>').html($('<a href="' + ticket + '" target="_blank"> Ticket </a>'));
     var eventUrl = $('<p>').html($('<a href="' + url + '" target="_blank"> SeatgeekLink </a>'));
-    // var closeBtn = $('<button id="closeBtn">').text('Close');
 
+  
+    
     eventDetailBox.append(eventDate, place, address, eventType, nameOfPerformer, performerSlug, eventScore, ticket, eventUrl);
-    eventInformation.append(eventTitle, eventDetailBox);
+    eventInformation.append(eventTitle, eventDetailBox); 
 
     eventDetails.append(imgContainer, eventInformation);
 
-    // searchResultEl.append(eventDetails);    
+    
     $('.modal-content').append(eventDetails);
 
-    // geoPostCode(postalCode,state);
+    // geoPostCode(postalCode,state);   // display covid data
     geoPostCode('08852', 'New Jersey');
 }
 
@@ -455,7 +343,7 @@ function geoPostCode(zip, state) {
     // })
 }
 
-// returns object of covid data; insert in deisply event func apend info to event card
+// returns object of covid data; insert in display event func apend info to event card
 function cdcCovidData(state, county) {
 
     var apiUrl = "https://data.cdc.gov/resource/3nnm-4jni.json?$order=date_updated%20DESC&$limit=1&state=" + state + "&county=" + county + "%20County";
@@ -496,30 +384,244 @@ function covidAppend(data) {
     var levelEl = $('<p>').text("Covid Level: " + level);
     var covidCaseEl = $('<p>').text("Cases Per 100K: " + covidCase);
     var popEl = $('<p>').text("County Populataion: " + pop);
-    var updateDayEl = $('<p>').text("Last Updated: " + updateDay);
+    var updateDayEl = $('<p>').text("Last Updated: " + dayjs(updateDay).format('MMM D, YYYY [-] hh:mm a'));
 
 
     covidDisplay.append(countyEl, levelEl, covidCaseEl, popEl, updateDayEl);
-    $('.detail-information').append(covidDisplay);
+
+    var saveBtnContainer = $('<div class="save-button-container">')
+    var saveBtn = $('<button class="save-button">');
+    saveBtn.attr('id','event-save-button');
+    saveBtn.text("Search Save");
+    saveBtnContainer.append(saveBtn);
+
+    $('.detail-information').append(covidDisplay,saveBtnContainer);
 }
 
 
 
-searchFormEl.on('submit', searchHandle);
-connectUrl(eventUrl + "&geoip=true");
+// Pagination 
 
-$('#closeBtn').on('click', function () {
+function pagination(page, per_page, total) {
+
+    var totalPagination = parseInt(total / per_page) + 1;
+    var numberOfPagination = 10;    // default 10 pages  
+
+    console.log("pagination number: " + totalPagination);
+
+    var remainer = page % numberOfPagination;
+
+    console.log("remainer: " + remainer);
+
+    var beginNumber = page - (page % numberOfPagination) + 1;
+
+    if (remainer === 0) {
+        beginNumber -= numberOfPagination;
+    }
+
+    console.log("beginNumber: " + beginNumber);
+
+    var lastNumber = page - (page % numberOfPagination) + numberOfPagination;
+    if (remainer === 0) {
+        lastNumber -= numberOfPagination;
+    }
+
+    console.log("lastNumber: " + lastNumber);
+
+    if (lastNumber > totalPagination) {
+        lastNumber = totalPagination;
+    }
+
+    console.log("lastNumber: " + lastNumber);
+
+    var pagenation = $('.pagination');
+    pagenation.empty();
+
+    // console.log("paginationURL before: " + paginationURL);
+
+    // before pagination,  Only beginNumber is not 1
+    if (beginNumber !== 1) {
+
+        var pre = $('<a>');
+        pre.attr("href", "#");
+        pre.html("&laquo;");
+        pre.click(function () {            
+            paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (beginNumber - 1));  // previous page
+            console.log("paginationURL later: " + paginationURL);
+            connectUrl(paginationURL);
+            // return;
+        });
+
+        pagenation.append(pre);
+    }
+
+    // show page number
+    for (var i = 0; i < (lastNumber - beginNumber + 1); i++) {
+        
+        if (remainer === (i + 1) % numberOfPagination) {  // present page, add active class, no link        
+            var present = $('<a>');
+            present.addClass('active');
+            present.text(beginNumber + i);
+            pagenation.append(present);
+        } else {
+
+            // setting pagination URL
+            // If there is page parameter in the previous api url, replace the page number
+            if (paginationURL.includes('&page=')) { 
+                paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (beginNumber + i));
+            } else {    // else add page parameter
+                paginationURL += '&page=' + (beginNumber + i);
+            }
+
+            var present = $('<a>');
+            present.attr("href", "#");
+            present.attr("onclick", "connectUrl('" + paginationURL + "'); return false;");  // add pagination URL 
+
+            present.text(beginNumber + i);
+
+            pagenation.append(present);
+        }
+    }
+
+    // after pagination, show when there is more pages
+    if (lastNumber !== totalPagination) {
+        
+        // setting pagination URL
+        // If there is page parameter in the previous api url, replace the page number
+        if (paginationURL.includes('&page=')) {
+            paginationURL = paginationURL.replace(/(&page=)[^\&]+/, '$1' + (lastNumber + 1));
+        }  else {       // else add page parameter
+            paginationURL += '&page=' + (lastNumber + 1);
+        }
+
+        var present = $('<a>');
+        present.attr("href", "#");
+        present.attr("onclick", "connectUrl('" + paginationURL + "'); return false;");
+        present.html("&raquo;");
+        pagenation.append(present);
+
+    }
+}
+
+////////////////////////////// Saving Button //////////////////////
+
+// Add seached event data to local stroage
+function storeSearch(data) {
+
+    var localStorageArray = getLocalstroage();
+
+    var store = [];
+
+    if (localStorageArray === null) {   // if there is no localstorage data
+        // console.log("storage is null");
+        store.push(data);
+    } else {        //  if there are localstorage data
+        // console.log("storage is not empty");
+        for (var i = 0; i < localStorageArray.length; i++) {
+            store.push(localStorageArray[i]);
+        }
+        store.push(data);
+    }
+   
+    setLocalStroage(store); // Store added data to localstorage
+    showBtn();  // Show stored button
+}
+
+// Get localstorage Data
+function getLocalstroage() {
+    return JSON.parse(localStorage.getItem('searchEvent'));
+}
+
+// Set localstorage Data
+function setLocalStroage(data) {
+    localStorage.setItem('searchEvent', JSON.stringify(data));
+}
+
+// Show Stored city data button
+function showBtn() {
+   
+
+    storeBtnListEl.empty(); // empty the previous button
+    
+    var btn = getLocalstroage();
+
+    // If there is stored data, making the button for the stored city name
+    if (btn !== null) {
+        for (let i = 0; i < btn.length; i++) {
+            var title = btn[i].title.split(' ');
+            var addBtn = $('<button id="' + btn[i].id + '">').text(title[0] +' '+ title[1]);
+            addBtn.addClass('btn save-button');
+            storeBtnListEl.append(addBtn);
+        }
+
+        // At the end of the listed button add the reset button that erase the stored button
+        var resetBtn = $('<button id="reset">').text("Reset");
+        resetBtn.addClass('btn reset');
+        storeBtnListEl.append(resetBtn);        
+    }
+}
+
+// Stored Button handling
+// If clicking the title button, it will show the event
+// If clicking the reset button, it will clear the button
+function handleButton() {
+
+
+    console.log("HandleButton");
+    var id = $(this).attr('id');
+
+    if(id === 'reset'){   // if it is reset button
+        reset();
+        showBtn();
+        return;
+    }
+
+    var events = getLocalstroage();
+
+    for(var i=0; i<events.length; i++){
+
+        console.log("In side the For");
+        console.log("Event id: " + typeof events[i].id);
+        console.log("Button id: "+typeof id);
+
+        if(parseInt(id) === events[i].id){
+
+            console.log("In side the IF");
+            displayDetails(events[i]);
+            return ;
+        }
+    }
+    
+    return ;
+    
+}
+
+// Clean the localstorage
+function reset(){
+    localStorage.clear();
+    showBtn();
+}
+
+
+function handleSaveButton(){
+    console.log("Hit the button");
+    storeSearch(eventSave);
+
+}
+
+
+
+searchFormEl.on('submit', searchHandle);      // search form event control
+connectUrl(eventUrl + "&geoip=true");   // first visit, default is user ip address
+
+$('#closeBtn').on('click', function () {       // modal close button
     modal.style.display = "none";
-    console.log("close");
+    // console.log("close");
 });
 
+$('.modal-content').on('click', '#event-save-button', handleSaveButton);
+
+storeBtnListEl.on('click', '.btn', handleButton); // cilck on city name button
 
 
-
-// Pagination Js
-
-
-
-
-
-//////////////////////////// Pagination End
+showBtn(); // Saved events show
