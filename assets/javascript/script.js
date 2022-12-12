@@ -19,7 +19,8 @@ var searchBtn = $('#btn-search');
 var searchResultEl = $('#search-results');
 
 var storeBtnListEl = $('.saved-button-container');    // saved button list
-var rengeEl;
+var rengeEl = $('#range');  //range 
+var sort = $('#sort');
 
 
 
@@ -76,8 +77,10 @@ function searchHandle(event) {
 
     var range = 30;
 
-    if (rengeEl) {    // search by range, default is 30mi
-        range = rengeEl;
+    console.log("renge: "+rengeEl.val());
+
+    if (rengeEl.val()) {    // search by range, default is 30mi
+        range = rengeEl.val();
     }
 
     apiUrl += '&range=' + range + 'mi';
@@ -101,6 +104,10 @@ function searchHandle(event) {
 
 
     apiUrl += types;    // search by type   
+
+    if(sort.val()){
+        apiUrl += '&sort=' + sort.val();     // Sorting to Desc
+    }
 
 
     // if(desc){
@@ -206,7 +213,7 @@ function displayEvent(data) {
        
 
         var eventDetails = $('<div class="event-details">');
-        var eventImage = $('<div>');
+        var eventImage = $('<div class="event-image">');
         var imgA = $('<a>');
         imgA.attr("href", "#");
         imgA.click(function () {     // sending events[i] to displayDetails
@@ -232,7 +239,7 @@ function displayEvent(data) {
         eventTitle.append(titleA);
 
         var eventDate = $('<p>').text(dayjs(date).format('MMM D, YYYY') + ' / Place: ' + placeName + ' / ' + address + ', ' + displayLocation);
-        var eventPerfomer = $('<p>').text('Event Type: ' + type + " / Performer: " + performerName);
+        var eventPerfomer = $('<p>').text('Score: ' +score + '/ Event Type: ' + type + " / Performer: " + performerName);
         var eventUrl = $('<p>').html($('<a href="' + url + '" target="_blank"> SeatgeekLink </a>'));
 
         eventInformation.append(eventTitle, eventDate, eventPerfomer, eventUrl);
@@ -276,9 +283,9 @@ function displayDetails(events) {
     var slug = performers.slug;
 
 
-    var eventDetails = $('<div class="row detail-container">');
+    var eventDetails = $('<div class="row detail-container responsive">');
     var imgContainer = $('<div class="image-container">');
-    var eventImg = $('<img height="400" width="400">');
+    var eventImg = $('<img>');
     eventImg.attr('src', image);
     imgContainer.append(eventImg);
     imgContainer.append($('<div id ="map">'));
@@ -308,8 +315,8 @@ function displayDetails(events) {
     $('.modal-content').append(eventDetails);
 
 
-    // geoPostCode(postalCode,state);   // display covid data
-    geoPostCode('08852', 'New Jersey');
+    geoPostCode(postalCode,state);   // display covid data
+    // geoPostCode('08852', 'New Jersey');
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiYmxhbmtldDIwMDAiLCJhIjoiY2xia2oydWFnMDByOTQwcG1iMHBkbnh5eiJ9.Yu_vJDHEbQJ1Yhmz91_E7g';
         const map = new mapboxgl.Map({
@@ -342,18 +349,18 @@ function geoPostCode(zip, state) {
     console.log("function geoPostCode");
     console.log("zip:" + zip);
     console.log("state:" + state);
-    cdcCovidData(state, "Middlesex");
+    cdcCovidData(state, zip);
 
-    // $.ajax({
-    //   url: " https://service.zipapi.us/zipcode/county/"+ zip +"/?X-API-KEY=js-9bba29279d7363655cc244b9ad8465ee",
-    //   method: "GET",
-    // }).then(function (response) {
-    //   console.log("Zip --> County Ajax Reponse \n-------------");
-    //   console.log(response);
-    //   var county = response.data.county;
-    //   cdcCovidData(state,county);
+    $.ajax({
+      url: " https://service.zipapi.us/zipcode/county/"+ zip +"/?X-API-KEY=js-9bba29279d7363655cc244b9ad8465ee",
+      method: "GET",
+    }).then(function (response) {
+      console.log("Zip --> County Ajax Reponse \n-------------");
+      console.log(response);
+      var county = response.data.county;
+      cdcCovidData(state,county);
 
-    // })
+    })
 }
 
 // returns object of covid data; insert in display event func apend info to event card
