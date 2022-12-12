@@ -551,7 +551,7 @@ function storeSearch(data) {
                 return ;
             }
             else {
-                messageCall("Saved!");
+                // messageCall("Saved!");
             }
             store.push(localStorageArray[i]);
         }
