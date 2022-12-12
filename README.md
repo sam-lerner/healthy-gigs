@@ -38,7 +38,7 @@ Additonally, we hope to add an additonal site feature of a map API. This will al
 
 ## Credits
 
-This page was created as a project for the Rutgers Coding Bootcamp. It was coded by Sam Lerner, Peter Lim, Jake Nguyen and Jackie Zheng. We thank Professor Joe Han, TAs Paul Cwik, Justyn Subrai and Manoli Koutouzos for their guidance with this project. 
+This page was created as a project for the Rutgers Coding Bootcamp. It was coded by [Sam Lerner](https://github.com/sam-lerner), [Peter Lim](https://github.com/peterlim995), [Jake Nguyen](https://github.com/JakeTNguyen) and [Jackie Zheng](https://github.com/jackiezheng1998). We thank Professor Joe Han, TAs Paul Cwik, Justyn Subrai and Manoli Koutouzos for their guidance with this project. 
 
 Event information is provided by [Seatgeek](https://platform.seatgeek.com/)
 
