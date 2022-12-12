@@ -3,7 +3,6 @@ var state = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado
 
 console.log("Begin");
 
-var modal = document.getElementById("myModal");
 var searchFormEl = $('#search-form'); // Input Form
 var eventNameEl = $('#event-name'); // Event Name
 var locationEl = $('#location-input'); //City Name
@@ -206,6 +205,7 @@ function displayEvent(data) {
        
 
         var eventDetails = $('<div class="event-details">');
+        // var eventImage = $('<div class="event-image">').html($('<a href="#" onclick="displayDetails("'+city+'")"><img src="'+image+'" alt="'+title+'"></a>'));
         var eventImage = $('<div>');
         var imgA = $('<a>');
         imgA.attr("href", "#");
@@ -269,11 +269,6 @@ function displayDetails(events) {
     var city = venue.city;
     var displayLocation = venue.display_location;
 
-    var performers = events.performers[0];   // performers
-    var performerName = performers.name;
-    var image = performers.image;
-    var ticket = performers.url;
-    var slug = performers.slug;
 
 
     var eventDetails = $('<div class="row detail-container">');
