@@ -96,3 +96,9 @@
   text-decoration: none;
   cursor: pointer;
 }
+.parallax {
+  max-height: 50%; 
+}
+.parallax-1 {
+  max-height: 50%;
+}

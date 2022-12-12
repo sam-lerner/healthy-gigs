@@ -6,6 +6,11 @@ body {
 }
 .parallax-1 {
     width: 100%;
+    height: 50%;
+}
+.parallax {
+    width: 100%;
+    height: 50%; 
 }
 #search-bar {
     width: 100%;
