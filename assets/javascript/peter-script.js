@@ -517,10 +517,17 @@ function storeSearch(data) {
         store.push(data);
     } else {        //  if there are localstorage data
         // console.log("storage is not empty");
-        for (var i = 0; i < localStorageArray.length; i++) {
+        for (var i = 0; i < localStorageArray.length; i++) {                      
+
+            if(data.id === localStorageArray[i].id){
+                console.log("Same");
+                messageCall("Already Exit");
+                return ;
+            }
             store.push(localStorageArray[i]);
         }
         store.push(data);
+        messageCall("Saved!");
     }
    
     setLocalStroage(store); // Store added data to localstorage
@@ -536,6 +543,31 @@ function getLocalstroage() {
 function setLocalStroage(data) {
     localStorage.setItem('searchEvent', JSON.stringify(data));
 }
+
+function messageCall(message){
+    // alert(message);
+    console.log("message Call");
+    var addmessage = $('<p>').text(message);
+    $('.message-container').append(addmessage);
+    clearMessage();
+}
+
+// Clear the message after certain time
+function clearMessage() {
+  
+    var time = 3;  // 3 seconds
+    var timerInterval = setInterval(function() {
+      time--;
+      
+      if(time === 0) {
+        clearInterval(timerInterval);
+        $('.message-container').empty();        
+      }
+  
+    }, 1000);
+  }
+
+
 
 // Show Stored city data button
 function showBtn() {

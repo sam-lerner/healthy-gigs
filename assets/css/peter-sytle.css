@@ -61,7 +61,7 @@
 
 
 
-.save-button{
+.save-button {
 
   margin: 5px 0;
   align-items: center;
@@ -76,7 +76,7 @@
   color: #FFFFFF;
   cursor: pointer;
   display: inline-flex;
-  font-family: CircularStd,sans-serif;
+  font-family: CircularStd, sans-serif;
   font-size: 1rem;
   height: auto;
   justify-content: center;
@@ -85,7 +85,7 @@
   position: relative;
   text-align: center;
   text-decoration: none;
-  transition: background-color .2s,background-position .2s;
+  transition: background-color .2s, background-position .2s;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -206,7 +206,9 @@
 }
 
 /* Add a grey background color on mouse-over */
-.pagination a.save-button:not(.active) {background-color: #ddd;}
+.pagination a.save-button:not(.active) {
+  background-color: #ddd;
+}
 
 /* Pagination End */
 
@@ -223,7 +225,7 @@
 }
 
 
-.reset{
+.reset {
 
   margin: 5px 0;
   align-items: center;
@@ -238,7 +240,7 @@
   color: #FFFFFF;
   cursor: pointer;
   display: inline-flex;
-  font-family: CircularStd,sans-serif;
+  font-family: CircularStd, sans-serif;
   font-size: 1rem;
   height: auto;
   justify-content: center;
@@ -247,7 +249,7 @@
   position: relative;
   text-align: center;
   text-decoration: none;
-  transition: background-color .2s,background-position .2s;
+  transition: background-color .2s, background-position .2s;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -268,3 +270,22 @@
   box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
 }
 
+/* #event-save-button {
+  position: relative;
+} */
+
+
+.message-container {
+  z-index: 1;
+  /* width: 300px;
+  height: 200px; */
+  /* background: #149BF3; */
+  /* opacity: .4;  */
+  position: fixed;
+  top: 50%;
+  color: #1f2257;  
+  width: 100%;
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+}
