@@ -12,9 +12,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/materialize.css">
-    <link rel="stylesheet" href="assets/css/sam-style.css">
+    <!-- <link rel="stylesheet" href="assets/css/sam-style.css"> -->
     <link rel="stylesheet" href="./assets/css/style.css">
-    <!-- <link rel="stylesheet" href="./assets/css/peter-sytle.css"> -->
+    <!-- <link rel="stylesheet" href="./assets/css/styleJackie.css"> -->
+    
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+    
+    <!-- <style>
+    body { margin: 0; padding: 0; }
+    #map { position: relative; top: 0; bottom: 0; width: 400px; height: 300px; }
+    </style> -->
+     <!-- <link rel="stylesheet" href="./assets/css/peter-sytle.css">  -->
     <title>Healthy Gigs</title>
 </head>
 
@@ -56,16 +64,16 @@
                                 <label for="event-name">Event Name</label>
                             </div>
                             <div class="input-field row">
-                                <select multiple>
-                                    <option value="" disabled selected>Event Type</option>
-                                    <option value="1" id="concerts">Concert</option>
-                                    <option value="2" id="music-festival">Music Festival</option>
-                                    <option value="3" id="theater">Theater</option>
-                                    <option value="4" id="sporting-events">Sporting Events</option>
-                                    <option value="5" id="golf">Golf</option>
-                                    <option value="6" id="family">Family</option>
-                                    <option value="7" id="comedy">Comedy</option>
-                                    <option value="8" id="dance">Dance</option>
+                                <select name="type" multiple id="event-type">
+                                    <option value="" disabled>Event Type</option>
+                                    <option value="concert" id="concerts">Concerts</option>
+                                    <option value="family" id="familys">Familys</option>
+                                    <option value="theater" id="theater">Theater</option>
+                                    <option value="sports" id="sports">Sports</option>
+                                    <option value="comedy" id="comedy">Comedy</option>
+                                    <option value="music_festival" id="music_festival">Music Festival</option>
+                                    <option value="broadway_tickets_national" id="broadway_tickets_national">Broadway
+                                    </option>
                                 </select>
                             </div>
                             <div class="row input-field">
@@ -127,6 +135,36 @@
 
                     </div>
                 </div>
+                <!-- Pagination Begin -->
+                <div class="pagination-container">
+                    <div class="pagination">
+                        <!-- <a href="#">&laquo;</a>
+                            <a href="#">1</a>
+                            <a class="active" href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#">5</a>
+                            <a href="#">6</a>
+                            <a href="#">&raquo;</a> -->
+                    </div>
+                </div>
+                <!-- Pagination End -->
+
+                <!-- Saved Button -->
+
+                <div class="saved-button-container">
+                    Saved Button
+                </div>
+
+                <!-- Saved Button End-->
+
+                <!-- Message -->
+
+                <div class="message-container">
+
+                </div>
+
+                <!-- Message -->
             </div>
             <div class="col s4 m3 l2">
 
@@ -149,7 +187,9 @@
     <script src="./assets/javascript/materialize.js"></script>
     <script src="./assets/javascript/sam-style-components.js"></script>
     <script src="./assets/javascript/script.js"></script>
-    <script src="./assets/javascript/peter-script.js"></script>    
+    <!-- <script src="./assets/javascript/peter-script.js"></script>     -->
+    <!-- <script src="assets/javascript/jake-map-merge-peter.js"></script> -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
 </body>
 
 </html>
