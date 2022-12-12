@@ -13,7 +13,13 @@
     <link rel="stylesheet" href="assets/css/materialize.css">
     <link rel="stylesheet" href="assets/css/sam-style.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/peter-sytle.css">
+    <link rel="stylesheet" href="./assets/css/peter-sytle.css"> 
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+    <style>
+    body { margin: 0; padding: 0; }
+    #map { position: relative; top: 0; bottom: 0; width: 400px; height: 300px; }
+    </style>
     <title>Healthy Gigs</title>
 </head>
 
@@ -83,7 +89,7 @@
                                 <label for="end-date">Start Date:</label>
                             </div>
                             <!-- Button for search -->
-                            <button type='submit' class="row sidenav-close"id="btn-search">Search</button>
+                            <button type='submit' class="row sidenav-close" id="btn-search">Search</button>
                         </form>
                     </div>
             </li>
@@ -164,8 +170,8 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
     <script src="./assets/javascript/materialize.js"></script>
     <script src="./assets/javascript/sam-style-components.js"></script>
-    <script src="./assets/javascript/script.js"></script>
-    <!-- <script src="./assets/javascript/peter-script.js"></script>     -->
+    <!-- <script src="./assets/javascript/script.js"></script> -->
+    <script src="./assets/javascript/jake-map-merge-peter.js"></script>
 </body>
 
 </html>

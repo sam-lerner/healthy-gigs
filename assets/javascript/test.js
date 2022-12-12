@@ -70,15 +70,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYmxhbmtldDIwMDAiLCJhIjoiY2xia2l5cmp0MDBxZTN2b
         // geoPostCode(postalCode,state);
         geoPostCode('08852','New Jersey');
         
-        mapboxgl.accessToken = 'pk.eyJ1IjoiYmxhbmtldDIwMDAiLCJhIjoiY2xia2oydWFnMDByOTQwcG1iMHBkbnh5eiJ9.Yu_vJDHEbQJ1Yhmz91_E7g';
-        const map = new mapboxgl.Map({
-        container: 'map', // container ID
-        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-        style: 'mapbox://styles/mapbox/streets-v12', // style URL
-        center: [-98.5, 40], // starting position [lng, lat]
-        zoom: 9 // starting zoom
-    });
-    
+        
 
         //add
         mapboxgl.accessToken = 'pk.eyJ1IjoiYmxhbmtldDIwMDAiLCJhIjoiY2xia2oydWFnMDByOTQwcG1iMHBkbnh5eiJ9.Yu_vJDHEbQJ1Yhmz91_E7g';
@@ -89,4 +81,10 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYmxhbmtldDIwMDAiLCJhIjoiY2xia2l5cmp0MDBxZTN2b
             center: [-98.5, 40], // starting position [lng, lat]
             zoom: 9 // starting zoom
         });
+
+       // const marker1 = new mapboxgl.Marker().setLngLat([lon, lat]).addTo(map).setPopup(new mapboxgl.Popup().setHTML(placeName));
+       // Create a new marker.
+        const marker = new mapboxgl.Marker()
+        .setLngLat([lon, lat])
+        .addTo(map);
     }
