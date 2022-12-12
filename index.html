@@ -58,14 +58,27 @@
                             <div class="input-field row">
                                 <select multiple>
                                     <option value="" disabled selected>Event Type</option>
-                                    <option value="1" id="concerts">Concerts</option>
-                                    <option value="2" id="sporting-events">Sporting Events</option>
+                                    <option value="1" id="concerts">Concert</option>
+                                    <option value="2" id="music-festival">Music Festival</option>
                                     <option value="3" id="theater">Theater</option>
+                                    <option value="4" id="sporting-events">Sporting Events</option>
+                                    <option value="5" id="golf">Golf</option>
+                                    <option value="6" id="family">Family</option>
+                                    <option value="7" id="comedy">Comedy</option>
+                                    <option value="8" id="dance">Dance</option>
                                 </select>
                             </div>
                             <div class="row input-field">
                                 <input id="location-input" type="text" class="validate">
                                 <label for="location-input">ZIP Code</label>
+                            </div>
+                            <div class="input-field row">
+                                <select single>
+                                    <option value="" disabled selected>Maximum Distance (miles)</option>
+                                    <option value="1" id="ten-miles">10</option>
+                                    <option value="2" id="twenty-five-miles">25 </option>
+                                    <option value="3" id="fifty-miles">50</option>
+                                </select>
                             </div>
                             <div class="row input-field">
                                 <input type="date" id="start-date">
@@ -73,7 +86,16 @@
                             </div>
                             <div class="row input-field">
                                 <input type="date" id="end-date">
-                                <label for="end-date">Start Date:</label>
+                                <label for="end-date">End Date:</label>
+                            </div>
+                            <div class="input-field row">
+                                <select single>
+                                    <option value="" disabled selected>Sort Results by: </option>
+                                    <option value="1" id="nearest">Nearest</option>
+                                    <option value="2" id="farthest">Farthest</option>
+                                    <option value="3" id="soonest">Soonest</option>
+                                    <option value="4" id="latest">Latest</option>
+                                </select>
                             </div>
                             <!-- Button for search -->
                             <button type='submit' class="row sidenav-close" id="btn-search">Search</button>
