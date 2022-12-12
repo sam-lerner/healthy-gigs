@@ -301,13 +301,23 @@ body {
   /* opacity: .4;  */
   position: fixed;
   top: 50%;
-  color: #1f2257;  
+  color: #1f2257;
   width: 100%;
   text-align: center;
   font-size: 25px;
   font-weight: bold;
 }
 
-.parallax-container{
+.parallax-container {
   height: 15vh;
 }
+
+header {
+  font-family: 'Concert One', cursive;
+}
+
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  /* font-family: 'Nunito Sans', sans-serif; */
+}
+

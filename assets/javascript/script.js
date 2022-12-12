@@ -307,6 +307,7 @@ function displayDetails(events) {
     
     $('.modal-content').append(eventDetails);
 
+
     // geoPostCode(postalCode,state);   // display covid data
     geoPostCode('08852', 'New Jersey');
 
@@ -391,6 +392,7 @@ function covidAppend(data) {
 
     // console.log("level: "+level);
 
+   
     var covidDisplay = $('<div class="covid-detail">');
     var countyEl = $('<h5>').text(county);
     var levelEl = $('<p>').text("Covid Level: " + level);
@@ -402,12 +404,24 @@ function covidAppend(data) {
     covidDisplay.append(countyEl, levelEl, covidCaseEl, popEl, updateDayEl);
 
     var saveBtnContainer = $('<div class="save-button-container">')
-    var saveBtn = $('<button class="save-button">');
+    var saveBtn = $('<button class="save-button btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i>');
     saveBtn.attr('id','event-save-button');
-    saveBtn.text("Search Save");
+    // saveBtn.text("Save Search");
     saveBtnContainer.append(saveBtn);
 
+
     $('.detail-information').append(covidDisplay,saveBtnContainer);
+    
+    // Modal conditonal formatting
+    if (level== 'High'){
+        $('.modal-content').addClass('red');
+    } else if (level== 'Medium'){
+        $('.modal-content').addClass('yellow');
+    } else if (level== 'Low'){
+        $('.modal-content').addClass('green');
+    } else {
+        $('.modal-content').addClass('gray');
+    }
 }
 
 
@@ -533,8 +547,11 @@ function storeSearch(data) {
 
             if(data.id === localStorageArray[i].id){
                 console.log("Same");
-                messageCall("Already Exit");
+                messageCall("Already Saved");
                 return ;
+            }
+            else {
+                // messageCall("Saved!");
             }
             store.push(localStorageArray[i]);
         }
