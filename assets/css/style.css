@@ -307,3 +307,7 @@ body {
   font-size: 25px;
   font-weight: bold;
 }
+
+.parallax-container{
+  height: 15vh;
+}
