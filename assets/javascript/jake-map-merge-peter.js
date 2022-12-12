@@ -280,10 +280,8 @@ function displayDetails(events) {
     var imgContainer = $('<div class="image-container">');
     var eventImg = $('<img height="400" width="400">');
     eventImg.attr('src', image);
-    imgContainer.append(eventImg);   
-    imgContainer.append($('<div id ="map">')); 
-    
-
+    imgContainer.append(eventImg);
+    imgContainer.append($('<div id ="map">'));
 
     var eventInformation = $('<div class="detail-information">');
     var eventTitle = $('<h3>').text(title);
@@ -309,8 +307,8 @@ function displayDetails(events) {
     
     $('.modal-content').append(eventDetails);
 
-    // geoPostCode(postalCode,state);
-    geoPostCode('08852','New Jersey');
+    // geoPostCode(postalCode,state);   // display covid data
+    geoPostCode('08852', 'New Jersey');
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiYmxhbmtldDIwMDAiLCJhIjoiY2xia2oydWFnMDByOTQwcG1iMHBkbnh5eiJ9.Yu_vJDHEbQJ1Yhmz91_E7g';
         const map = new mapboxgl.Map({
@@ -321,7 +319,7 @@ function displayDetails(events) {
             zoom: 9 // starting zoom
         });
 
-    const marker1 = new mapboxgl.Marker().setLngLat([lon, lat]).addTo(map).setPopup(new mapboxgl.Popup().setHTML(placeName));
+        const marker1 = new mapboxgl.Marker().setLngLat([lon, lat]).addTo(map).setPopup(new mapboxgl.Popup().setHTML(placeName));
 }
 
 

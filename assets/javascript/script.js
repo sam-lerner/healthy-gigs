@@ -686,5 +686,3 @@ $('.modal-content').on('click', '#event-save-button', handleSaveButton);
 
 storeBtnListEl.on('click', '.btn', handleButton); // cilck on city name button
 
-
-showBtn(); // Saved events show
