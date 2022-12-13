@@ -128,10 +128,12 @@ h1 {
 
 .detail-box {
   flex: 0 0 50%;
+  padding-right: 15px;
 }
 
 .covid-detail {
   flex: 0 0 50%;
+
 }
 
 .save-button-container {

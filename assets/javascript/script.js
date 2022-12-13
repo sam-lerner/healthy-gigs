@@ -418,6 +418,7 @@ function covidAppend(data) {
     var saveBtnContainer = $('<div class="save-button-container">')
     var saveBtn = $('<button class="save-button btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i>');
     saveBtn.attr('id','event-save-button');
+    saveBtn.attr('title','Save');
     // saveBtn.text("Save Search");
     saveBtnContainer.append(saveBtn);
 
