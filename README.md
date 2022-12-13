@@ -29,12 +29,12 @@ The webpage has a collapsable search bar on the left side of the screen, which c
 After the search is undertaken, the user is presented with ten results per page. To see additional results, there is an option at the bottom of the results section to navigate to additional pages of results. Selected events are stored locally so that a user can easily view them again, allowing comparison between events as needed. 
 
 ### COVID Information
-Clicking on the title of an event brings up a card displaying expanded event information. To the right of this is information about the COVID conditons around the event site. This includes the CDC COVID level (high, medium or low), the number of cases per 100k people, the county population and the date when the information was last update. We hope this will help people make an informed decision about attending events and what level of caution to take when going out.
+Clicking on the title of an event brings up a card displaying expanded event information, as well as a map of the event's location. To the right of this is information about the COVID conditons around the event site. This includes the CDC COVID level (high, medium or low), the number of cases per 100k people, the county population and the date when the information was last update. We hope this will help people make an informed decision about attending events and what level of caution to take when going out.
 
 ### Plans for future expansion
 In the future, we hope to continue to improve the site's design and layout to make it more engaging for users on both computers and mobile devices. 
 
-Additonally, we hope to add an additonal site feature of a map API. This will allow the user to see all events in their search laid out on a single map and would allow for pulling up of event information directly from this map instead of having to filter through all the search results. The map could also have a color filter that would be responsive to input from the CDC COVID threat level. 
+Additonally, we hope to continue to develop the interaction with the map API. We would like the user to be able to see all events in their search laid out on a single map and would allow for pulling up of event information directly from this map instead of having to filter through all the search results. The map could also have a color filter that would be responsive to input from the CDC COVID threat level. 
 
 ## Credits
 
