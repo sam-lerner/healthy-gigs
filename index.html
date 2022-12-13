@@ -194,7 +194,39 @@
         </div>
         <!-- Modal content -->
         <div class="modal-content">
-
+            <div class="row detail-container">
+                <div class="image-container">
+                    <img class="detail-img">
+                    <div id="map">dsdgsdg</div>
+                </div>
+                <div class="detail-information">
+                    <h3 id="event-title"></h3>
+                    <div class="detail-box">
+                        <h5><span id="eventDate"></span></h5>
+                        <h5><span id="place"></span></h5>
+                        <h5><span id="address"></span></h5>
+                        <p>Event Type: <span id="eventType"></span></p>
+                        <p>Performer: <span id="nameOfPerformer"></span></p>
+                        <p>Slug: <span id="performerSlug"></span></p>
+                        <p>Score: <span id="eventScore"></span></p>
+                        <p><a id="ticket" target="_blank">Ticket</a></p>
+                        <p><a id="eventUrl" target="_blank"> SeatgeekLink </a></p>
+                    </div>
+                    <div class="covid-detail">
+                        <h5 id="countyEl">(API limit is over: try later)</h5>
+                        <p>Covid Level: <span id="levelEl"></span></p>
+                        <p>Cases Per 100K: <span id="covidCaseEl"></span></p>
+                        <p>County Populataion: <span id="popEl"></span></p>
+                        <p>Last Updated: <span id="updateDayEl"></span></p>
+                    </div>
+                    <div class="save-button-container">
+                        <button
+                            class="save-button btn-floating btn-large waves-effect waves-light red"
+                            id="event-save-button" title="Save"><i class="material-icons">add</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
 
         </div>

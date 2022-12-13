@@ -212,6 +212,7 @@ h1 {
 /* The Modal (background) */
 .modal_background {
   display: none;
+  
   /* Hidden by default */
   position: fixed;
   /* Stay in place */
@@ -485,12 +486,12 @@ body {
     margin: auto;
 
   }
-
+/* 
   .pagination a {
     color: black;
     padding: 8px 10px;
 
-  }
+  } */
 
   /* .responsive {
     display: block;
