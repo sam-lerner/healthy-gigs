@@ -10,7 +10,7 @@ Healthy Gigs is a website dedicated to finding safe events during the COVID-19 p
 
 The following animation shows the web application's appearance and functionality:
 
-![website demo](./images/website-nav.gif)
+![website demo](./assets/images/website-nav.gif)
 
 
 ## Installation
