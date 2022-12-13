@@ -14,36 +14,35 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Josefin+Sans&family=Nunito+Sans&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Concert+One&family=Josefin+Sans&family=Nunito+Sans&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/materialize.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
 
-   
+
     <title>Healthy Gigs</title>
 </head>
 
+
+
+
+
 <body class="blue lighten-5 white-text">
+
+
     <header class="page-header">
         <nav class="nav-extended blue lighten-2">
-            <div class="nav-content center">
-                <a class="nav-title">Healthy Gigs</a>
+            <div class="nav-content center title">
+                <!-- <a class="nav-title">Healthy Gigs</a> -->
+                <h1>Healthy Gigs</h1>
             </div>
 
 
-            <!-- The Modal -->
-            <div id="myModal" class="modal responsive">
-                <div class="btn-content">
-                    <button id="closeBtn">Close</button>
-                </div>
-                <!-- Modal content -->
-                <div class="modal-content">
 
-                </div>
-            </div>
-            <!-- The Modal End-->
         </nav>
     </header>
     <main>
@@ -77,10 +76,11 @@
                             </div>
                             <div class="input-field row">
                                 <select single id="range">
-                                    <option value="" disabled selected>Maximum Distance (miles)</option>
                                     <option value="10" id="ten-miles">10</option>
-                                    <option value="15" id="twenty-five-miles">25 </option>
+                                    <option value="20" id="twenty-five-miles">20 </option>
+                                    <option value="" selected>Range (miles) - default 30mi</option>
                                     <option value="50" id="fifty-miles">50</option>
+                                    <option value="100" id="hundred-miles">100</option>
                                 </select>
                             </div>
                             <div class="row input-field">
@@ -93,7 +93,7 @@
                             </div>
                             <div class="input-field row">
                                 <select single id="sort">
-                                    <option value="" disabled selected>Sort Results by: </option>
+                                    <option value="" selected>Sort Results by: </option>
                                     <option value="datetime_utc.asc" id="soonest">Soonest</option>
                                     <option value="datetime_utc.desc" id="latest">Latest</option>
                                     <option value="score.desc" id="highest">Highest Score</option>
@@ -101,11 +101,12 @@
                                 </select>
                             </div>
                             <!-- Button for search -->
-                            <button type='submit' class="row sidenav-close" id="btn-search">Search</button>
+                            <button type='submit' class="row sidenav-close save-button search"
+                                id="btn-search">SEARCH</button>
                         </form>
-                         <!-- Saved Button -->
+                        <!-- Saved Button -->
 
-                         <div class="saved-button-container">
+                        <div class="saved-button-container">
                             Saved Button
                         </div>
 
@@ -113,23 +114,36 @@
                     </div>
             </li>
         </ul>
-        <div class="nav-wrapper blue lighten-2 row">
+        <!-- <div class="nav-wrapper blue lighten-2 row">
             <a href="#" data-target="slide-out" class="col s2 sidenav-trigger white-text"><i
                     class="medium material-icons">search</i></a>
-                    <p id="tag" class="col s8 center">Welcome to our site. Healthy Gigs is a website dedicated to finding safe
-                        events during the COVID-19 pandemic. The website allows you to search for events based on type, location
-                        or date. When the event results display, you will also be presented with information on COVID levels in
-                        the area where your events are.</p>
-                    <div class="col s2">
+            <p id="tag" class="col s8 center">Welcome to our site. Healthy Gigs is a website dedicated to finding safe
+                events during the COVID-19 pandemic. The website allows you to search for events based on type, location
+                or date. When the event results display, you will also be presented with information on COVID levels in
+                the area where your events are.</p> -->
+        <!-- <div class="col s2">
 
-            </div>
+            </div> -->
+        <!-- </div> -->
+
+
+        <div class="blue lighten-2 welcome">
+
+            <p id="tag" class="center welcome-message">Welcome to our site. Healthy Gigs is a website dedicated to
+                finding safe
+                events during the COVID-19 pandemic. The website allows you to search for events based on type, location
+                or date. When the event results display, you will also be presented with information on COVID levels in
+                the area where your events are.</p>
+
+            <a href="#" data-target="slide-out" class="sidenav-trigger white-text search-icon"><i
+                    class="medium material-icons">search</i></a>
         </div>
-           <div class="parallax-container">
+        <div class="parallax-container">
             <div class="parallax"><img src="./assets/images/concert-background.jpeg"></div>
         </div>
         <div class="row">
             <!-- Overall container for the results. To the left will be a darker bar with recent searches. The Middle will have a window that displays the search results. Below the results field will be information about current COVID conditions in the area.  -->
-           
+
             <div class="results-area">
                 <!-- Larger panel  -->
                 <div id="search-results">
@@ -160,34 +174,52 @@
                 </div>
                 <!-- Pagination End -->
 
-                
-                <!-- Message -->
 
-                <div class="message-container">
 
-                </div>
-
-                <!-- Message -->
             </div>
-           
+
         </div>
         <div class="parallax-container">
             <div class="parallax"><img src="./assets/images/concert-background.jpeg"></div>
         </div>
     </main>
-    <footer class="page-footer blue lighten-2 center">
-        <h6>Stay safe and have fun!</h6>
+    <footer class="blue lighten-2 center foot-message">
+        <h4>Stay safe and have fun!</h4>
     </footer>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal_background">
+        <div class="btn-content">
+            <button id="closeBtn">Close</button>
+        </div>
+        <!-- Modal content -->
+        <div class="modal-content">
+
+
+
+        </div>
+    </div>
+    <!-- The Modal End-->
+
+    <!-- Message -->
+
+    <div class="message-container">
+
+    </div>
+
+    <!-- Message -->
+
+
     <!-- Dayjs  -->
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
         integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-    
+
     <script src="./assets/javascript/materialize.js"></script>
     <script src="./assets/javascript/sam-style-components.js"></script>
     <script src="./assets/javascript/script.js"></script>
-   
+
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
 </body>
 
