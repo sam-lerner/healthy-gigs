@@ -48,6 +48,8 @@ console.log("Day: " + dayjs('2022-12-07T08:30:00'));
 // Event Handle: when click the search button
 function searchHandle(event) {
 
+    eventUrl = 'https://api.seatgeek.com/2/events?client_id=' + apiKeyEvent;
+
     // console.log("function call");
     // console.log("URL: "+ eventUrl);
 
@@ -97,8 +99,8 @@ function searchHandle(event) {
 
     var types = '';
 
-
-    $('select option:selected').each(function (i, selectedElement) {    //  Get elements from selected option
+   
+    $('#event-type option:selected').each(function (i, selectedElement) {    //  Get elements from selected option
         types += '&type=' + $(selectedElement).val();
     });
 
@@ -131,18 +133,19 @@ function connectUrl(url) {
                 return response.json();
             } else {
                 alert('Error: ' + response.statusText);
+                return ; 
             }
         })
         .then(function (data) {
             console.log("Data: " + data);
             // console.log("apiUrl: " + apiUrl);
-
             displayEvent(data);
 
         })
         .catch(function (error) {
             console.log(error);
             alert('Some problems happened!');
+            return ;
         });
 
 }
@@ -214,14 +217,16 @@ function displayEvent(data) {
 
         var eventDetails = $('<div class="event-details">');
         var eventImage = $('<div class="event-image">');
+
+        
         var imgA = $('<a>');
         imgA.attr("href", "#");
         imgA.click(function () {     // sending events[i] to displayDetails
             displayDetails(events[i]);
-            // modal.style.display = "block";
+            
         });
 
-        var img = $('<img id=' + i + '>');
+        var img = $('<img class="small-image">');
         img.attr("src", image);
         imgA.append(img);
         eventImage.append(imgA);
@@ -283,9 +288,9 @@ function displayDetails(events) {
     var slug = performers.slug;
 
 
-    var eventDetails = $('<div class="row detail-container responsive">');
+    var eventDetails = $('<div class="row detail-container">');
     var imgContainer = $('<div class="image-container">');
-    var eventImg = $('<img>');
+    var eventImg = $('<img class="detail-img">');
     eventImg.attr('src', image);
     imgContainer.append(eventImg);
     imgContainer.append($('<div id ="map">'));
@@ -315,8 +320,8 @@ function displayDetails(events) {
     $('.modal-content').append(eventDetails);
 
 
-    geoPostCode(postalCode,state);   // display covid data
-    // geoPostCode('08852', 'New Jersey');
+    // geoPostCode(postalCode,state);   // display covid data
+    geoPostCode('08852', 'New Jersey');
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiYmxhbmtldDIwMDAiLCJhIjoiY2xia2oydWFnMDByOTQwcG1iMHBkbnh5eiJ9.Yu_vJDHEbQJ1Yhmz91_E7g';
         const map = new mapboxgl.Map({
@@ -349,18 +354,18 @@ function geoPostCode(zip, state) {
     console.log("function geoPostCode");
     console.log("zip:" + zip);
     console.log("state:" + state);
-    cdcCovidData(state, zip);
+    cdcCovidData(state, "Middlesex");
 
-    $.ajax({
-      url: " https://service.zipapi.us/zipcode/county/"+ zip +"/?X-API-KEY=js-9bba29279d7363655cc244b9ad8465ee",
-      method: "GET",
-    }).then(function (response) {
-      console.log("Zip --> County Ajax Reponse \n-------------");
-      console.log(response);
-      var county = response.data.county;
-      cdcCovidData(state,county);
+    // $.ajax({
+    //   url: " https://service.zipapi.us/zipcode/county/"+ zip +"/?X-API-KEY=js-9bba29279d7363655cc244b9ad8465ee",
+    //   method: "GET",
+    // }).then(function (response) {
+    //   console.log("Zip --> County Ajax Reponse \n-------------");
+    //   console.log(response);
+    //   var county = response.data.county;
+    //   cdcCovidData(state,county);
 
-    })
+    // })
 }
 
 // returns object of covid data; insert in display event func apend info to event card
@@ -421,13 +426,13 @@ function covidAppend(data) {
     
     // Modal conditonal formatting
     if (level== 'High'){
-        $('.modal-content').addClass('red');
+        $('.modal-content').addClass('red-backgrond');
     } else if (level== 'Medium'){
-        $('.modal-content').addClass('yellow');
+        $('.modal-content').addClass('yellow-background');
     } else if (level== 'Low'){
-        $('.modal-content').addClass('green');
+        $('.modal-content').addClass('green-background');
     } else {
-        $('.modal-content').addClass('gray');
+        $('.modal-content').addClass('gray-background');
     }
 }
 
@@ -584,6 +589,7 @@ function messageCall(message){
     // alert(message);
     console.log("message Call");
     var addmessage = $('<p>').text(message);
+    addmessage.attr('style','background: #149BF3; padding: 20px;')
     $('.message-container').append(addmessage);
     clearMessage();
 }
@@ -613,11 +619,25 @@ function showBtn() {
     
     var btn = getLocalstroage();
 
+    
     // If there is stored data, making the button for the stored city name
     if (btn !== null) {
         for (let i = 0; i < btn.length; i++) {
-            var title = btn[i].title.split(' ');
-            var addBtn = $('<button id="' + btn[i].id + '">').text(title[0] +' '+ title[1]);
+            var shortTitle = btn[i].title.substring(0,19);
+            var title = shortTitle.split(' ');
+            var str = '';
+            for (let i = 0; i < title.length; i++){
+                str += title[i];
+                if(i === 2){
+                    break;             
+                } else {
+                    str += ' ';
+                }
+                     
+            }
+
+            var addBtn = $('<div id="' + btn[i].id + '">').text(str); 
+            
             addBtn.addClass('btn save-button');
             storeBtnListEl.append(addBtn);
         }
