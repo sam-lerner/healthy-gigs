@@ -320,8 +320,8 @@ function displayDetails(events) {
     $('.modal-content').append(eventDetails);
 
 
-    // geoPostCode(postalCode,state);   // display covid data
-    geoPostCode('08852', 'New Jersey');
+    geoPostCode(postalCode,state);   // display covid data
+    // geoPostCode('08852', 'New Jersey');
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiYmxhbmtldDIwMDAiLCJhIjoiY2xia2oydWFnMDByOTQwcG1iMHBkbnh5eiJ9.Yu_vJDHEbQJ1Yhmz91_E7g';
         const map = new mapboxgl.Map({
@@ -354,18 +354,18 @@ function geoPostCode(zip, state) {
     console.log("function geoPostCode");
     console.log("zip:" + zip);
     console.log("state:" + state);
-    cdcCovidData(state, "Middlesex");
+    // cdcCovidData(state, "Middlesex");
 
-    // $.ajax({
-    //   url: " https://service.zipapi.us/zipcode/county/"+ zip +"/?X-API-KEY=js-9bba29279d7363655cc244b9ad8465ee",
-    //   method: "GET",
-    // }).then(function (response) {
-    //   console.log("Zip --> County Ajax Reponse \n-------------");
-    //   console.log(response);
-    //   var county = response.data.county;
-    //   cdcCovidData(state,county);
+    $.ajax({
+      url: " https://service.zipapi.us/zipcode/county/"+ zip +"/?X-API-KEY=js-9bba29279d7363655cc244b9ad8465ee",
+      method: "GET",
+    }).then(function (response) {
+      console.log("Zip --> County Ajax Reponse \n-------------");
+      console.log(response);
+      var county = response.data.county;
+      cdcCovidData(state,county);
 
-    // })
+    })
 }
 
 // returns object of covid data; insert in display event func apend info to event card
