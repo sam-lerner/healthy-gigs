@@ -261,7 +261,7 @@ function displayDetails(events) {
     modal.style.display = "block";
     eventSave = events; // Save event;
 
-    $('.modal-content').empty();
+    // $('.modal-content').empty();
 
     var type = events.type;    
     var title = events.title;
@@ -288,36 +288,44 @@ function displayDetails(events) {
     var slug = performers.slug;
 
 
-    var eventDetails = $('<div class="row detail-container">');
-    var imgContainer = $('<div class="image-container">');
-    var eventImg = $('<img class="detail-img">');
-    eventImg.attr('src', image);
-    imgContainer.append(eventImg);
-    imgContainer.append($('<div id ="map">'));
-
-    var eventInformation = $('<div class="detail-information">');
-    var eventTitle = $('<h3>').text(title);
-
-    var eventDetailBox = $('<div class="detail-box">');
-    var eventDate = $('<h5>').text(dayjs(dateLocal).format('MMM D, YYYY [-] hh:mm a'));
-    var place = $('<h5>').text(placeName);
-    var address = $('<h5>').text(displayLocation);
-    var eventType = $('<p>').text('Event Type: ' + type);
-    var nameOfPerformer = $('<p>').text('Performer: ' + performerName);
-    var performerSlug = $('<p>').text('Slug: ' + slug);
-    var eventScore = $('<p>').text("Score: " + score);
-    var ticket = $('<p>').html($('<a href="' + ticket + '" target="_blank"> Ticket </a>'));
-    var eventUrl = $('<p>').html($('<a href="' + url + '" target="_blank"> SeatgeekLink </a>'));
-
-  
+    // var eventDetails = $('<div class="row detail-container">');
+    // var imgContainer = $('<div class="image-container">');
+    // var eventImg = $('<img class="detail-img">');
+    $('.detail-img').attr('src', image);
+    // imgContainer.append(eventImg);
+    // imgContainer.append($('<div id ="map">'));
     
-    eventDetailBox.append(eventDate, place, address, eventType, nameOfPerformer, performerSlug, eventScore, ticket, eventUrl);
-    eventInformation.append(eventTitle, eventDetailBox); 
-
-    eventDetails.append(imgContainer, eventInformation);
 
     
-    $('.modal-content').append(eventDetails);
+
+
+
+    // var eventInformation = $('<div class="detail-information">');
+    // var eventTitle = $('<h3>').text(title);
+    $('#event-title').text(title);
+
+    // var eventDetailBox = $('<div class="detail-box">');
+    $('#eventDate').text(dayjs(dateLocal).format('MMM D, YYYY [-] hh:mm a'));
+    $('#place').text(placeName);
+    $('#address').text(displayLocation);
+    $('#eventType').text(type);
+    $('#nameOfPerformer').text(performerName);
+    $('#performerSlug').text(slug);
+    $('#eventScore').text(score);
+    $('#ticket').attr('href',ticket);
+    $('#eventUrl').attr('href',url);
+
+    
+    
+    // eventDetailBox.append(eventDate, place, address, eventType, nameOfPerformer, performerSlug, eventScore, ticket, eventUrl);
+    // eventInformation.append(eventTitle, eventDetailBox); 
+
+    // $('.detail-information').append(eventTitle, eventDetailBox);
+
+    // eventDetails.append(imgContainer, eventInformation);
+
+    
+    // $('.modal-content').append(eventDetails);
 
 
     geoPostCode(postalCode,state);   // display covid data
@@ -405,29 +413,29 @@ function covidAppend(data) {
     // console.log("level: "+level);
 
    
-    var covidDisplay = $('<div class="covid-detail">');
-    var countyEl = $('<h5>').text(county);
-    var levelEl = $('<p>').text("Covid Level: " + level);
-    var covidCaseEl = $('<p>').text("Cases Per 100K: " + covidCase);
-    var popEl = $('<p>').text("County Populataion: " + pop);
-    var updateDayEl = $('<p>').text("Last Updated: " + dayjs(updateDay).format('MMM D, YYYY [-] hh:mm a'));
+    // var covidDisplay = $('<div class="covid-detail">');
+    $('#countyEl').text(county);
+    $('#levelEl').text(level);
+    $('#covidCaseEl').text(covidCase);
+    $('#popEl').text(pop);
+    $('#updateDayEl').text(dayjs(updateDay).format('MMM D, YYYY [-] hh:mm a'));
 
 
-    covidDisplay.append(countyEl, levelEl, covidCaseEl, popEl, updateDayEl);
+    // covidDisplay.append(countyEl, levelEl, covidCaseEl, popEl, updateDayEl);
 
-    var saveBtnContainer = $('<div class="save-button-container">')
-    var saveBtn = $('<button class="save-button btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i>');
-    saveBtn.attr('id','event-save-button');
-    saveBtn.attr('title','Save');
+    // var saveBtnContainer = $('<div class="save-button-container">')
+    // var saveBtn = $('<button class="save-button btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i>');
+    // saveBtn.attr('id','event-save-button');
+    // saveBtn.attr('title','Save');
     // saveBtn.text("Save Search");
-    saveBtnContainer.append(saveBtn);
+    // saveBtnContainer.append(saveBtn);
 
 
-    $('.detail-information').append(covidDisplay,saveBtnContainer);
+    // $('.detail-information').append(covidDisplay,saveBtnContainer);
     
     // Modal conditonal formatting
     if (level== 'High'){
-        $('.modal-content').addClass('red-backgrond');
+        $('.modal-content').addClass('red-background');
     } else if (level== 'Medium'){
         $('.modal-content').addClass('yellow-background');
     } else if (level== 'Low'){
@@ -444,7 +452,7 @@ function covidAppend(data) {
 function pagination(page, per_page, total) {
 
     var totalPagination = parseInt(total / per_page) + 1;
-    var numberOfPagination = 10;    // default 10 pages  
+    var numberOfPagination = 5;    // default 10 pages  
 
     console.log("pagination number: " + totalPagination);
 
@@ -706,6 +714,14 @@ connectUrl(eventUrl + "&geoip=true");   // first visit, default is user ip addre
 $('#closeBtn').on('click', function () {       // modal close button
     modal.style.display = "none";
     // console.log("close");
+    $('#countyEl').text('(API limit is over: try later)');
+    $('#levelEl').text('');
+    $('#covidCaseEl').text('');
+    $('#popEl').text('');
+    $('#updateDayEl').text('');
+
+
+
 });
 
 $('.modal-content').on('click', '#event-save-button', handleSaveButton);
